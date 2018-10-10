@@ -38,13 +38,13 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     protected void addPerson(ActionEvent event) {
-        AllVehicleInformation information = new AllVehicleInformation();
-        ObservableList<View> cars = FXCollections.observableArrayList(information.VehiclesAdd());
+       // AllVehicleInformation.class.;
+        ObservableList<View> cars = FXCollections.observableArrayList(/*VehiclesAdd()*/);
         tableView.setItems(cars);
     }
     @FXML
     private void AddButton(ActionEvent event) {
-        
+       
     }
 
     @FXML

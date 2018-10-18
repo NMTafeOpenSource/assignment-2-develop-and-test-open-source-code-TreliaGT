@@ -21,11 +21,13 @@ namespace assignment_2
     /// <summary>
     /// Interaction logic for AddVehiclesWindow.xaml
     /// </summary>
-    public partial class AddVehiclesWindow : Window
+    public partial class AddVehiclesWindow : Window 
     {
         public ArrayList VE = new ArrayList();
        List<Vehicles> V = new List<Vehicles>();
       Vehicles Vehicle = new Vehicles();
+
+        
 
         public AddVehiclesWindow()
         {
@@ -47,7 +49,6 @@ namespace assignment_2
                 Vehicle.totalkmLastS = Convert.ToInt32(KMSLS.Text);
                 Vehicle.RequiresS = Convert.ToBoolean(RS.IsChecked);
 
-
                 V.Add(Vehicle);
                 VE.Add(V);
             }catch{
@@ -60,7 +61,7 @@ namespace assignment_2
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow m = new MainWindow();
+          MainWindow m = new MainWindow();
             m.DataGrid.ItemsSource = VE;
             m.records.Text = VE.Count + "Records";
             m.Show();

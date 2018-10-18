@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:assignment_2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="355" Width="530">
     <Grid>
         <Button Content="Add" HorizontalAlignment="Left" Margin="341,10,0,0" VerticalAlignment="Top" Width="75" Click="Add_Click"/>
         <DataGrid Name="DataGrid" HorizontalAlignment="Left" Height="222" Margin="17,71,0,0" VerticalAlignment="Top" Width="479" SelectionChanged="DataGrid_SelectionChanged">
@@ -17,7 +17,7 @@
                 <DataGridTextColumn Header="Requires Service" Width="*" Binding="{Binding RequiresS}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="View Details" HorizontalAlignment="Left" Margin="421,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="View Details" HorizontalAlignment="Left" Margin="421,10,0,0" VerticalAlignment="Top" Width="75" Click="Details_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="17,10,0,0" TextWrapping="Wrap" Text="Vehicles" VerticalAlignment="Top" Height="36" Width="150" />
         <StatusBar HorizontalAlignment="Left" Height="22" Margin="0,298,0,0" VerticalAlignment="Top" Width="517">
             <StatusBarItem DockPanel.Dock="Right">

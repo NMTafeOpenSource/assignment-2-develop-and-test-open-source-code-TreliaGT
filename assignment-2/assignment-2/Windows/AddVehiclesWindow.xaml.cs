@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,20 +35,27 @@ namespace assignment_2
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            
-            Vehicle.model = Model.Text;
-            Vehicle.manufacturer = Manufacturer.Text;
-            Vehicle.makeYear = Convert.ToInt32(makeYear.Text);
-            Vehicle.Registration = Registration.Text;
-            Vehicle.TotalKm = Convert.ToInt32(TotalKMS.Text);
-            Vehicle.totalS = Convert.ToInt32(TServices.Text);
-            Vehicle.revenueRecorded = Convert.ToInt32(Revenue.Text);
-            Vehicle.totalkmLastS = Convert.ToInt32(KMSLS.Text);
-            Vehicle.RequiresS = Convert.ToBoolean(RS.IsChecked);
+            try
+            {
+                Vehicle.model = Model.Text;
+                Vehicle.manufacturer = Manufacturer.Text;
+                Vehicle.makeYear = Convert.ToInt32(makeYear.Text);
+                Vehicle.Registration = Registration.Text;
+                Vehicle.TotalKm = Convert.ToInt32(TotalKMS.Text);
+                Vehicle.totalS = Convert.ToInt32(TServices.Text);
+                Vehicle.revenueRecorded = Convert.ToInt32(Revenue.Text);
+                Vehicle.totalkmLastS = Convert.ToInt32(KMSLS.Text);
+                Vehicle.RequiresS = Convert.ToBoolean(RS.IsChecked);
 
-            V.Add(Vehicle);
-            VE.Add(V);
-           
+
+                V.Add(Vehicle);
+                VE.Add(V);
+            }catch{
+                Error.Text = "Error has Occur, Please Try Again";
+                int milliseconds = 5000;
+                Thread.Sleep(milliseconds);
+                Error.Text = " ";
+            }
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -58,7 +66,6 @@ namespace assignment_2
             m.Show();
             this.Close();
         }
-
     
     }
 }

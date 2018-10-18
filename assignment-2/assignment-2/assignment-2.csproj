@@ -54,14 +54,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddVehiclesWindow.xaml.cs">
+    <Compile Include="Windows\AddVehiclesWindow.xaml.cs">
       <DependentUpon>AddVehiclesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FuelPurchase.cs" />
-    <Compile Include="Journey.cs" />
-    <Compile Include="Service.cs" />
-    <Compile Include="Vehicles.cs" />
-    <Page Include="AddVehiclesWindow.xaml">
+    <Compile Include="Classes\FuelPurchase.cs" />
+    <Compile Include="Classes\Journey.cs" />
+    <Compile Include="Classes\Service.cs" />
+    <Compile Include="Classes\Vehicles.cs" />
+    <Page Include="Windows\AddVehiclesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

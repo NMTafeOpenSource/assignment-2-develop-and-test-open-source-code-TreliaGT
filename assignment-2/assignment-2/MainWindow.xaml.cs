@@ -29,7 +29,7 @@ namespace assignment_2
             this.Hide();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Details_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -21,16 +21,16 @@
         <Label Content="Revenue Recorded:" HorizontalAlignment="Left" Margin="0,208,0,0" VerticalAlignment="Top" Height="26" Width="115" RenderTransformOrigin="0.498,0.131"/>
         <Label Content="Km Since Last Service:" HorizontalAlignment="Left" Margin="0,177,0,0" VerticalAlignment="Top" Height="26" Width="127" RenderTransformOrigin="0.596,-2.136"/>
         <Label Content="Requires a Service:" HorizontalAlignment="Left" Margin="0,239,0,0" VerticalAlignment="Top" Height="26" Width="110" RenderTransformOrigin="0.465,0.989"/>
-        <TextBox Name="Manufacturer" HorizontalAlignment="Left" Height="23" Margin="139,12,0,0" TextWrapping="Wrap" Text="Unknown" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name ="makeYear" HorizontalAlignment="Left" Height="23" Margin="139,39,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="Manufacturer" HorizontalAlignment="Left" Height="23" Margin="139,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name ="makeYear" HorizontalAlignment="Left" Height="23" Margin="139,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Model:" HorizontalAlignment="Left" Margin="0,62,0,0" VerticalAlignment="Top" Width="81"/>
-        <TextBox Name ="Model" HorizontalAlignment="Left" Height="23" Margin="139,65,0,0" TextWrapping="Wrap" Text="Unknown" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name ="Registration" HorizontalAlignment="Left" Height="23" Margin="139,91,0,0" TextWrapping="Wrap" Text="Unknown" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name ="TotalKMS" HorizontalAlignment="Left" Height="23" Margin="139,118,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="TServices" HorizontalAlignment="Left" Height="23" Margin="139,149,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="KMSLS" HorizontalAlignment="Left" Height="23" Margin="139,177,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="Revenue" HorizontalAlignment="Left" Height="23" Margin="139,207,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name ="RS" HorizontalAlignment="Left" Height="23" Margin="139,241,0,0" TextWrapping="Wrap" Text="False" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name ="Model" HorizontalAlignment="Left" Height="23" Margin="139,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name ="Registration" HorizontalAlignment="Left" Height="23" Margin="139,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name ="TotalKMS" HorizontalAlignment="Left" Height="23" Margin="139,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="TServices" HorizontalAlignment="Left" Height="23" Margin="139,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="KMSLS" HorizontalAlignment="Left" Height="23" Margin="139,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="Revenue" HorizontalAlignment="Left" Height="23" Margin="139,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <CheckBox Name="RS" Content="Yes" HorizontalAlignment="Left" Margin="139,244,0,0" VerticalAlignment="Top"/>
 
 
     </Grid>

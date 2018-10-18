@@ -13,7 +13,7 @@ namespace assignment_2
         public String manufacturer { get; set; }
         public String model { get; set; }
         public int makeYear { get; set; }
-        public String Vehicle { get; set; }
+       
         public String Registration { get; set; }
         public int TotalKm { get; set; }
         public int totalS { get; set; }
@@ -23,18 +23,6 @@ namespace assignment_2
 
         private FuelPurchase FP = new FuelPurchase();
 
-        public ArrayList Cars = new ArrayList();
-
-
-        /// <summary>
-        /// Get Vehicle name
-        /// </summary>
-        /// <returns> Vehicle</returns>
-        public string GetVehicle()
-        {
-            return  manufacturer + " " + model + " " + makeYear.ToString();
-         
-        }
 
         /// <summary>
         /// TODO Create an addKilometers method which takes a parameter for distance travelled 
@@ -48,7 +36,9 @@ namespace assignment_2
             FP.purchaseFuel(litres, price);
         }
 
-
-
+        public static implicit operator List<object>(Vehicles v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

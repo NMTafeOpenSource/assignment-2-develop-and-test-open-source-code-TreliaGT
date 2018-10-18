@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,14 +22,10 @@ namespace assignment_2
     /// </summary>
     public partial class AddVehiclesWindow : Window
     {
-        MainWindow M;
+        public ArrayList VE = new ArrayList();
+       List<Vehicles> V = new List<Vehicles>();
+      Vehicles Vehicle = new Vehicles();
 
-        Vehicles Vs;
-        Vehicles Vehicle;
-
-
-
-        List<Vehicles> V = new List<Vehicles>();
         public AddVehiclesWindow()
         {
             InitializeComponent();
@@ -37,32 +35,30 @@ namespace assignment_2
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             
-            Vs.model = Model.Text;
-            Vs.manufacturer = Manufacturer.Text;
-            Vs.makeYear = Convert.ToInt32( makeYear.Text);
-
-         
-
-            Vehicle.Vehicle = Vs.GetVehicle();
+            Vehicle.model = Model.Text;
+            Vehicle.manufacturer = Manufacturer.Text;
+            Vehicle.makeYear = Convert.ToInt32(makeYear.Text);
             Vehicle.Registration = Registration.Text;
             Vehicle.TotalKm = Convert.ToInt32(TotalKMS.Text);
             Vehicle.totalS = Convert.ToInt32(TServices.Text);
             Vehicle.revenueRecorded = Convert.ToInt32(Revenue.Text);
             Vehicle.totalkmLastS = Convert.ToInt32(KMSLS.Text);
-            Vehicle.RequiresS = Convert.ToBoolean(RS.Text);
+            Vehicle.RequiresS = Convert.ToBoolean(RS.IsChecked);
 
             V.Add(Vehicle);
-
-          
-            Vehicle.Cars.Add(V);
-
+            VE.Add(V);
+           
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             MainWindow m = new MainWindow();
+            m.DataGrid.ItemsSource = VE;
+            m.records.Text = VE.Count + "Records";
             m.Show();
             this.Close();
         }
+
+    
     }
 }

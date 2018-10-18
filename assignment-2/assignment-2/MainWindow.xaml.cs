@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,28 +13,30 @@ namespace assignment_2
     public partial class MainWindow : Window
     {
       
+        Vehicles VE = new Vehicles();
+        AddVehiclesWindow Add = new AddVehiclesWindow();
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Load_Click(object sender, RoutedEventArgs e)
-        {
-       
-
-            DataGrid.ItemsSource = V.Cars;
-        }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            AddVehiclesWindow Add = new AddVehiclesWindow();
+          
             Add.Show();
             this.Hide();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            message.Text = DataGrid.Items.IndexOf(DataGrid.CurrentItem).ToString();
 
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -28,16 +29,20 @@ namespace assignment_2
         {
             gridDetails.Visibility = Visibility.Visible;
             grid1.Visibility = Visibility.Hidden;
+            addlabals.Visibility = Visibility.Visible;
         }
 
         private void Details_Click(object sender, RoutedEventArgs e)
         {
-
+            gridDetails.Visibility = Visibility.Visible;
+            grid1.Visibility = Visibility.Hidden;
+            addlabals.Visibility = Visibility.Hidden;
+            AddItem.IsEnabled = false;
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) //to show what record the user is on
         {
-            message.Text = DataGrid.Items.IndexOf(DataGrid.CurrentItem).ToString();
+            message.Text = DataGrid.SelectedIndex.ToString();
 
         }
 
@@ -62,6 +67,24 @@ namespace assignment_2
         {
             gridDetails.Visibility = Visibility.Hidden;
             grid1.Visibility = Visibility.Visible;
+            AddItem.IsEnabled = true;
+        }
+
+        public void viewDetails()
+        {
+            Vehicles theVehicle = new Vehicles();
+            int selected = DataGrid.SelectedIndex;
+            theVehicle = V.ElementAt(selected);
+
+            Model.Text = theVehicle.model;
+            Manufacturer.Text = theVehicle.manufacturer;
+            makeYear.Text = theVehicle.makeYear.ToString();
+            Registration.Text = theVehicle.Registration;
+            TotalKMS.Text = theVehicle.TotalKm.ToString();
+            TServices.Text = theVehicle.totalS.ToString();
+            Revenue.Text = theVehicle.revenueRecorded.ToString();
+            KMSLS.Text = theVehicle.totalkmLastS.ToString();
+           RS.IsChecked = theVehicle.RequiresS;
         }
     }
 }

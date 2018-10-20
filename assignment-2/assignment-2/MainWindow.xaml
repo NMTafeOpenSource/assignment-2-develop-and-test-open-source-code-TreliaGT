@@ -7,29 +7,63 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="355" Width="530">
     <Grid>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="341,10,0,0" VerticalAlignment="Top" Width="75" Click="Add_Click"/>
-        <DataGrid Name="DataGrid" HorizontalAlignment="Left" Height="222" Margin="17,71,0,0" VerticalAlignment="Top" Width="479" SelectionChanged="DataGrid_SelectionChanged">
-            <DataGrid.Columns>
-                <DataGridTextColumn  Header="ManuFacturer" Width="*" Binding="{Binding manufacturer}" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Model" Width="*" Binding="{Binding model}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Make Year" Width="*" Binding="{Binding makeYear}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Registration" Width="*" Binding="{Binding Registration}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Requires Service" Width="*" Binding="{Binding RequiresS}"></DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Content="View Details" HorizontalAlignment="Left" Margin="421,10,0,0" VerticalAlignment="Top" Width="75" Click="Details_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="17,10,0,0" TextWrapping="Wrap" Text="Vehicles" VerticalAlignment="Top" Height="36" Width="150" />
-        <StatusBar HorizontalAlignment="Left" Height="22" Margin="0,298,0,0" VerticalAlignment="Top" Width="517">
-            <StatusBarItem DockPanel.Dock="Right">
-                <TextBlock Name="message">Set</TextBlock>
-            </StatusBarItem>
-            <StatusBarItem>
-                <TextBlock Name="status">Ready</TextBlock>
-            </StatusBarItem>
-            <StatusBarItem>
-                <TextBlock Name="records">-Records</TextBlock>
-            </StatusBarItem>
-        </StatusBar>
-
+        <Grid Grid.Row="2" Grid.Column="2"
+              Name="grid1">
+            <Button Content="Add" HorizontalAlignment="Left" Margin="341,10,0,0" VerticalAlignment="Top" Width="75" Click="Add_Click"/>
+            <DataGrid Name="DataGrid" HorizontalAlignment="Left" Height="222" Margin="17,71,0,0" VerticalAlignment="Top" Width="479" SelectionChanged="DataGrid_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn  Header="ManuFacturer" Width="*" Binding="{Binding manufacturer}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Model" Width="*" Binding="{Binding model}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Make Year" Width="*" Binding="{Binding makeYear}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Registration" Width="*" Binding="{Binding Registration}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Requires Service" Width="*" Binding="{Binding RequiresS}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="View Details" HorizontalAlignment="Left" Margin="421,10,0,0" VerticalAlignment="Top" Width="75" Click="Details_Click"/>
+            <TextBlock HorizontalAlignment="Left" Margin="17,10,0,0" TextWrapping="Wrap" Text="Vehicles" VerticalAlignment="Top" Height="36" Width="150" />
+            <StatusBar HorizontalAlignment="Left" Height="22" Margin="0,298,0,0" VerticalAlignment="Top" Width="517">
+                <StatusBarItem DockPanel.Dock="Right">
+                    <TextBlock Name="message">Set</TextBlock>
+                </StatusBarItem>
+                <StatusBarItem>
+                    <TextBlock Name="status">Ready</TextBlock>
+                </StatusBarItem>
+                <StatusBarItem>
+                    <TextBlock Name="records">-Records</TextBlock>
+                </StatusBarItem>
+            </StatusBar>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="2"
+              Name="gridDetails">
+            <Label x:Name="Warning" Content="" HorizontalAlignment="Left" Margin="17,40,0,0" VerticalAlignment="Top" Width="150"/>
+            <Label Content="Manufacturer:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
+            <Label Content="MakeYear:" HorizontalAlignment="Left" Margin="0,36,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
+            <Label Content="Registration:" HorizontalAlignment="Left" Margin="0,89,0,0" VerticalAlignment="Top" Height="26" Width="81" RenderTransformOrigin="0.48,1.473"/>
+            <Label Content="Total Km Travelled:" HorizontalAlignment="Left" Margin="0,115,0,0" VerticalAlignment="Top" Height="26" Width="110"/>
+            <Label Content="Total Services:" HorizontalAlignment="Left" Margin="0,146,0,0" VerticalAlignment="Top" Height="26" Width="90"/>
+            <Label Content="Revenue Recorded:" HorizontalAlignment="Left" Margin="0,208,0,0" VerticalAlignment="Top" Height="26" Width="115" RenderTransformOrigin="0.498,0.131"/>
+            <Label Content="Km Since Last Service:" HorizontalAlignment="Left" Margin="0,177,0,0" VerticalAlignment="Top" Height="26" Width="127" RenderTransformOrigin="0.596,-2.136"/>
+            <Label Content="Requires a Service:" HorizontalAlignment="Left" Margin="0,239,0,0" VerticalAlignment="Top" Height="26" Width="110" RenderTransformOrigin="0.465,0.989"/>
+            <TextBox Name="Manufacturer" HorizontalAlignment="Left" Height="23" Margin="139,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name ="makeYear" HorizontalAlignment="Left" Height="23" Margin="139,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Model:" HorizontalAlignment="Left" Margin="0,62,0,0" VerticalAlignment="Top" Width="81"/>
+            <TextBox Name ="Model" HorizontalAlignment="Left" Height="23" Margin="139,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name ="Registration" HorizontalAlignment="Left" Height="23" Margin="139,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name ="TotalKMS" HorizontalAlignment="Left" Height="23" Margin="139,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="TServices" HorizontalAlignment="Left" Height="23" Margin="139,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="KMSLS" HorizontalAlignment="Left" Height="23" Margin="139,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="Revenue" HorizontalAlignment="Left" Height="23" Margin="139,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <CheckBox Name="RS" Content="Yes" HorizontalAlignment="Left" Margin="139,244,0,0" VerticalAlignment="Top"/>
+            <Label Content="Name" HorizontalAlignment="Left" Margin="264,12,0,0" VerticalAlignment="Top"/>
+            <Label Content="Name" HorizontalAlignment="Left" Margin="264,92,0,0" VerticalAlignment="Top"/>
+            <Label Content="Name" HorizontalAlignment="Left" Margin="264,66,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.142,0.537"/>
+            <Label Content="Number" HorizontalAlignment="Left" Margin="264,40,0,0" VerticalAlignment="Top"/>
+            <Label Content="Number" HorizontalAlignment="Left" Margin="264,118,0,0" VerticalAlignment="Top"/>
+            <Label Content="Number" HorizontalAlignment="Left" Margin="264,146,0,0" VerticalAlignment="Top"/>
+            <Label Content="Number" HorizontalAlignment="Left" Margin="264,177,0,0" VerticalAlignment="Top"/>
+            <Label Content="Number" HorizontalAlignment="Left" Margin="264,208,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.907,0.78"/>
+            <Button Content="Add" HorizontalAlignment="Left" Margin="23,288,0,0" VerticalAlignment="Top" Width="75" Click="AddItem_Click" Grid.Column="1" Height="22"/>
+            <Button Content="Back" HorizontalAlignment="Left" Margin="141,288,0,0" VerticalAlignment="Top" Width="75" Click="Back_Click" Grid.Column="1" Height="22"/>
+        </Grid>
     </Grid>
 </Window>

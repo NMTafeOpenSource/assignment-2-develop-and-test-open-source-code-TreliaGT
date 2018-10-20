@@ -30,5 +30,3 @@ C:\Users\Trelia\Documents\GitHub\assignment-2-develop-and-test-open-source-code-
 C:\Users\Trelia\Documents\GitHub\assignment-2-develop-and-test-open-source-code-TreliaGT\assignment-2\assignment-2\obj\Debug\assignment_2.Properties.Resources.resources
 C:\Users\Trelia\Documents\GitHub\assignment-2-develop-and-test-open-source-code-TreliaGT\assignment-2\assignment-2\obj\Debug\assignment-2.csproj.GenerateResource.cache
 C:\Users\Trelia\Documents\GitHub\assignment-2-develop-and-test-open-source-code-TreliaGT\assignment-2\assignment-2\obj\Debug\assignment-2.csproj.CoreCompileInputs.cache
-C:\Users\Trelia\Documents\GitHub\assignment-2-develop-and-test-open-source-code-TreliaGT\assignment-2\assignment-2\obj\Debug\Windows\AddVehiclesWindow.g.cs
-C:\Users\Trelia\Documents\GitHub\assignment-2-develop-and-test-open-source-code-TreliaGT\assignment-2\assignment-2\obj\Debug\Windows\AddVehiclesWindow.baml

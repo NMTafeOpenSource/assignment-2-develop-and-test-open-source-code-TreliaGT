@@ -7,6 +7,7 @@ package test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import static java.util.Collections.list;
@@ -25,20 +26,23 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-
+import java.lang.String;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 /**
  *
  * @author V244682
  */
 public class FXMLDocumentController implements Initializable {
     
+   
    public ArrayList<Vehicle> list = new ArrayList();
     @FXML
     private Button Back;
     @FXML
     private Button Add;
-   
-    private ListView<Vehicle> Tableview;
     @FXML
     private Button Details;
     @FXML
@@ -47,13 +51,47 @@ public class FXMLDocumentController implements Initializable {
     private Pane add;
     @FXML
     private Text WarningL;
+    @FXML
+    private TableView<Vehicle> TableView;
+    @FXML
+    private TableColumn<Vehicle, String> Manufactor;
+    @FXML
+    private TableColumn<Vehicle, String> Model;
+    @FXML
+    private TableColumn<Vehicle, Integer> MakeYear;
+    @FXML
+    private TableColumn<Vehicle,String> Registration;
+    @FXML
+    private TableColumn<Vehicle, Integer> Odometre;
+    @FXML
+    private TableColumn<Vehicle, Integer> Tank;
+    @FXML
+    private TextField ManufactorT;
+    @FXML
+    private TextField ModelT;
+    @FXML
+    private TextField MakeYearT;
+    @FXML
+    private TextField RegistrationT;
+    @FXML
+    private TextField OdometreT;
+    @FXML
+    private TextField TankCT;
+    @FXML
+    private TextField LastServiceT;
+    @FXML
+    private TextField ServiceT;
+    @FXML
+    private TextField LastServiceDateT;
     
-
+  public ObservableList<Vehicle> Tasksdata;
+  Service s = new Service();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
        add.setVisible(false);
-        WarningL.setVisible(false);
+       Main.setVisible(true);
+        WarningL.setVisible(false); 
        getVehicles();
     }    
 
@@ -73,6 +111,8 @@ public class FXMLDocumentController implements Initializable {
     private void Detail_Click(ActionEvent event) {
         
     }
+    
+    //get vehicles from txt file
     public void getVehicles(){
             
         try {
@@ -85,19 +125,70 @@ public class FXMLDocumentController implements Initializable {
             String RegistrationNo =  inFile.next(); 
             int OdometerReadingKm = Integer.parseInt(inFile.next());
             int TankCapacityL = Integer.parseInt(inFile.next());
+            int LastService0 = Integer.parseInt(inFile.next());
+            int ServiceCourt = Integer.parseInt(inFile.next());
+            String Date = inFile.next();
             
-            
-           list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo,OdometerReadingKm,TankCapacityL));
+           list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date ));
             }
          
         } catch (FileNotFoundException ex) {
              WarningL.setVisible(true);
-            WarningL.setText("txt file not found");
+             WarningL.setText("txt file not found");
         }
         ObservableList<Vehicle> Tasksdata = FXCollections.observableArrayList(list);
-        Tableview.setItems(Tasksdata);
+          Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+       Model.setCellValueFactory(new PropertyValueFactory<>("model"));
+       MakeYear.setCellValueFactory(new PropertyValueFactory<>("makeYear"));
+       Registration.setCellValueFactory(new PropertyValueFactory<>("RegistrationNo"));
+       Odometre.setCellValueFactory(new PropertyValueFactory<>("OdometerReadingKm"));
+       Tank.setCellValueFactory(new PropertyValueFactory<>("TankCapacityL"));
+        TableView.setItems(Tasksdata);
     } 
 
+    @FXML //Add vehicles to tableview
+    private void AddVehicles_Click(ActionEvent event) {
+             String  manufacturer = ManufactorT.getText() ;
+            String model = ModelT.getText();
+            int makeYear =   Integer.parseInt(MakeYearT.getText()); 
+            String RegistrationNo =  RegistrationT.getText(); 
+            int OdometerReadingKm = Integer.parseInt(OdometreT.getText());
+            int TankCapacityL = Integer.parseInt(TankCT.getText());
+            int LastService0 = Integer.parseInt(LastServiceT.getText());
+            int ServiceCourt = Integer.parseInt(ServiceT.getText());
+            String Date = LastServiceDateT.getText();
+            
+           list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date ));
+        
+            ObservableList<Vehicle> Tasksdata = FXCollections.observableArrayList(list);
+          Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+       Model.setCellValueFactory(new PropertyValueFactory<>("model"));
+       MakeYear.setCellValueFactory(new PropertyValueFactory<>("makeYear"));
+       Registration.setCellValueFactory(new PropertyValueFactory<>("RegistrationNo"));
+       Odometre.setCellValueFactory(new PropertyValueFactory<>("OdometerReadingKm"));
+       Tank.setCellValueFactory(new PropertyValueFactory<>("TankCapacityL"));
+        TableView.setItems(Tasksdata);
+       
+        writerTxt();
+    }
+
+    public void writerTxt() {
+       try (PrintWriter outfile = new PrintWriter("src\\test\\Vehicle.txt")) {
+            
+       for (int i = 0; i < list.size(); i++) {
+           
+			outfile.println(list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " " + list.get(i).getRegistrationNo()
+                        + " " + list.get(i).getOdometerReadingKm() + " " + list.get(i).getTankCapacityL() + " " );
+                        
+		}
+          
+           
+       }catch (FileNotFoundException ex) {
+             WarningL.setVisible(true);
+             WarningL.setText("txt file not found or error with writing");
+        }
+
+    }
 }
 
 

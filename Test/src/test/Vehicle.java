@@ -18,7 +18,7 @@ public final class Vehicle {
         private int TankCapacityL;
                
 	private final FuelPurchase fuelPurchase;
-
+     private Service s = new Service();
 	/**
 	 * Class constructor specifying name of make (manufacturer), model and year
 	 * of make.
@@ -27,7 +27,8 @@ public final class Vehicle {
 	 * @param makeYear
          * @param RegistrationNo
 	 */
-	public Vehicle(String manufacturer, String model, int makeYear, String RegistrationNo,int OdometerReadingKm, int TankCapacityL) {
+	public Vehicle(String manufacturer, String model, int makeYear, String RegistrationNo,int OdometerReadingKm, int TankCapacityL
+        ,int LastService0, int ServiceCourt, String Date) {
 		setmanufacturer(manufacturer);
 		setModel(model);
 		setMakeYear(makeYear);
@@ -35,48 +36,52 @@ public final class Vehicle {
                 setOdometerReadingKm(OdometerReadingKm);
                 setTankCapacityL(TankCapacityL);
 		fuelPurchase = new FuelPurchase();
+                recoredService(LastService0,Date, ServiceCourt);
 	}
-
+        
+        
+        
+//Setter and getters
     public String getManufacturer() {
         return this.manufacturer;
     }
 
     public void setmanufacturer(String fmanufacturer) {
-        manufacturer = fmanufacturer;
+        this.manufacturer = fmanufacturer;
     }
 
     public String getModel(){
         return this.model;
     }
     public void setModel(String fModel){
-        model = fModel;
+        this.model = fModel;
     }
     public int getMakeYear(){
         return this.makeYear;
     }
     public void setMakeYear(int fmakeyear){
-        makeYear = fmakeyear;
+        this.makeYear = fmakeyear;
     }
     
      public String getRegistrationNo(){
         return this.RegistrationNo;
     }
     public void setRegistrationNo(String fRegistrationNo){
-        RegistrationNo = fRegistrationNo;
+        this.RegistrationNo = fRegistrationNo;
     }
     
       public int getOdometerReadingKm(){
         return this.OdometerReadingKm;
     }
    public void setOdometerReadingKm(int fOdometerReadingKm){
-        OdometerReadingKm = fOdometerReadingKm;
+        this.OdometerReadingKm = fOdometerReadingKm;
     }
   
      public int getTankCapacityL(){
         return this.TankCapacityL;
     }
     public void setTankCapacityL(int fTankCapacityL){
-        TankCapacityL = fTankCapacityL;
+        this.TankCapacityL = fTankCapacityL;
     }
         
 	/**
@@ -99,5 +104,10 @@ public final class Vehicle {
         // adds fuel to the car
         public void addFuel(double litres, double price){            
             fuelPurchase.purchaseFuel(litres, price);
-        }         
+        }   
+        
+        public void recoredService(int distance, String date, int count){
+            s.recordedService(distance, date ,count);
+        }
+        
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.FXMLDocumentController">
+    <children>
+      <Pane fx:id="add" layoutX="27.0" layoutY="24.0" prefHeight="496.0" prefWidth="295.0" visible="false">
+         <children>
+            <Button fx:id="Back" layoutX="229.0" layoutY="457.0" mnemonicParsing="false" onAction="#Back_Click" text="Back" />
+            <Button layoutX="176.0" layoutY="457.0" mnemonicParsing="false" text="Add" />
+         </children>
+      </Pane>
+      <Pane fx:id="Main" layoutX="14.0" layoutY="27.0" prefHeight="469.0" prefWidth="651.0">
+         <children>
+            <Button fx:id="Add" layoutX="515.0" layoutY="443.0" mnemonicParsing="false" onAction="#Show_Add" prefHeight="25.0" prefWidth="103.0" text=" Add Vechicle" />
+            <Button fx:id="Details" layoutX="412.0" layoutY="443.0" mnemonicParsing="false" onAction="#Detail_Click" text="View Details" />
+            <TableView layoutX="20.0" layoutY="35.0" prefHeight="395.0" prefWidth="602.0">
+               <columns>
+                  <TableColumn prefWidth="107.0" text="Manufactor" />
+                  <TableColumn prefWidth="144.0" text="Model" />
+                  <TableColumn prefWidth="75.0" text="MakeYear" />
+                  <TableColumn prefWidth="166.0" text="Odometre Reading Km" />
+                  <TableColumn prefWidth="109.0" text="Tank Capacity L" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <Text fx:id="WarningL" layoutX="74.0" layoutY="509.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="168.13671875" />
+    </children>
+</AnchorPane>

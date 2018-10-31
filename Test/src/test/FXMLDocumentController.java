@@ -86,6 +86,7 @@ public class FXMLDocumentController implements Initializable {
     
   public ObservableList<Vehicle> Tasksdata;
   Service s = new Service();
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -112,6 +113,19 @@ public class FXMLDocumentController implements Initializable {
         
     }
     
+     @FXML
+    private void Delete_Click(ActionEvent event) {
+        list.remove(TableView.getSelectionModel().getSelectedIndex());
+           Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+       Model.setCellValueFactory(new PropertyValueFactory<>("model"));
+       MakeYear.setCellValueFactory(new PropertyValueFactory<>("makeYear"));
+       Registration.setCellValueFactory(new PropertyValueFactory<>("RegistrationNo"));
+       Odometre.setCellValueFactory(new PropertyValueFactory<>("OdometerReadingKm"));
+       Tank.setCellValueFactory(new PropertyValueFactory<>("TankCapacityL"));
+        TableView.setItems(Tasksdata);
+        writerTxt();
+    }
+    
     //get vehicles from txt file
     public void getVehicles(){
             
@@ -131,19 +145,19 @@ public class FXMLDocumentController implements Initializable {
             
            list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date ));
             }
-         
+            ObservableList<Vehicle> Tasksdata = FXCollections.observableArrayList(list);
+            Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+            Model.setCellValueFactory(new PropertyValueFactory<>("model"));
+            MakeYear.setCellValueFactory(new PropertyValueFactory<>("makeYear"));
+             Registration.setCellValueFactory(new PropertyValueFactory<>("RegistrationNo"));
+             Odometre.setCellValueFactory(new PropertyValueFactory<>("OdometerReadingKm"));
+             Tank.setCellValueFactory(new PropertyValueFactory<>("TankCapacityL"));
+                TableView.setItems(Tasksdata);
         } catch (FileNotFoundException ex) {
              WarningL.setVisible(true);
-             WarningL.setText("txt file not found");
+             WarningL.setText("txt file not found or there is a space in the txt file");
         }
-        ObservableList<Vehicle> Tasksdata = FXCollections.observableArrayList(list);
-          Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
-       Model.setCellValueFactory(new PropertyValueFactory<>("model"));
-       MakeYear.setCellValueFactory(new PropertyValueFactory<>("makeYear"));
-       Registration.setCellValueFactory(new PropertyValueFactory<>("RegistrationNo"));
-       Odometre.setCellValueFactory(new PropertyValueFactory<>("OdometerReadingKm"));
-       Tank.setCellValueFactory(new PropertyValueFactory<>("TankCapacityL"));
-        TableView.setItems(Tasksdata);
+     
     } 
 
     @FXML //Add vehicles to tableview

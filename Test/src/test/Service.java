@@ -13,9 +13,9 @@ public class Service {
    // Constant to indicate that the vehicle needs to be serviced every 10,000km
     public static final int SERVICE_KILOMETER_LIMIT = 10000;
     
-   private int lastServiceOdometerKm=0;
-    private int serviceCount=0;
-   private String lastServiceDate;
+   public int lastServiceOdometerKm=0;
+    public int serviceCount=0;
+   public String lastServiceDate = "Unknown";
     
     // return the last service
     public int getLastServiceOdometerKm()
@@ -48,6 +48,15 @@ public class Service {
     public int getServiceCount()
     {
         return this.serviceCount;
+    }
+    
+    public String getLastServiceDate(){
+        return this.lastServiceDate;
+    }
+    
+      public int lastServiceOdometerKm()
+    {
+        return this.lastServiceOdometerKm;
     }
     
     /**

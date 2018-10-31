@@ -18,7 +18,7 @@ public final class Vehicle {
         private int TankCapacityL;
                
 	private final FuelPurchase fuelPurchase;
-     private Service s = new Service();
+     public Service s = new Service();
 	/**
 	 * Class constructor specifying name of make (manufacturer), model and year
 	 * of make.
@@ -36,7 +36,8 @@ public final class Vehicle {
                 setOdometerReadingKm(OdometerReadingKm);
                 setTankCapacityL(TankCapacityL);
 		fuelPurchase = new FuelPurchase();
-                recoredService(LastService0,Date, ServiceCourt);
+                s.recordedService(LastService0,Date, ServiceCourt);
+       
 	}
         
         
@@ -106,8 +107,7 @@ public final class Vehicle {
             fuelPurchase.purchaseFuel(litres, price);
         }   
         
-        public void recoredService(int distance, String date, int count){
-            s.recordedService(distance, date ,count);
-        }
-        
+      
+       
 }
+

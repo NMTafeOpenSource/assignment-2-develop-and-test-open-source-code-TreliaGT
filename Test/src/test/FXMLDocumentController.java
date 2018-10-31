@@ -174,15 +174,16 @@ public class FXMLDocumentController implements Initializable {
 
     public void writerTxt() {
        try (PrintWriter outfile = new PrintWriter("src\\test\\Vehicle.txt")) {
-            
+
        for (int i = 0; i < list.size(); i++) {
-           
-			outfile.println(list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " " + list.get(i).getRegistrationNo()
-                        + " " + list.get(i).getOdometerReadingKm() + " " + list.get(i).getTankCapacityL() + " " );
+        
+         outfile.println(list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " " + list.get(i).getRegistrationNo()
+                        + " " + list.get(i).getOdometerReadingKm() + " " + list.get(i).getTankCapacityL() + " "+ list.get(i).s.lastServiceOdometerKm + " " + list.get(i).s.serviceCount
+                        + " " + list.get(i).s.lastServiceDate);
                         
 		}
           
-           
+           getVehicles();
        }catch (FileNotFoundException ex) {
              WarningL.setVisible(true);
              WarningL.setText("txt file not found or error with writing");

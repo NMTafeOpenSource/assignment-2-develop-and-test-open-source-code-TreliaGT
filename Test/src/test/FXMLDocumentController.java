@@ -86,6 +86,12 @@ public class FXMLDocumentController implements Initializable {
     
   public ObservableList<Vehicle> Tasksdata;
   Service s = new Service();
+    @FXML
+    private Button AddB;
+    @FXML
+    private Button RentB;
+    @FXML
+    private Pane rentalP;
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -93,6 +99,7 @@ public class FXMLDocumentController implements Initializable {
        add.setVisible(false);
        Main.setVisible(true);
         WarningL.setVisible(false); 
+        rentalP.setVisible(false);
        getVehicles();
     }    
 
@@ -100,17 +107,20 @@ public class FXMLDocumentController implements Initializable {
     private void Back_Click(ActionEvent event) {
           add.setVisible(false);
           Main.setVisible(true);
+          rentalP.setVisible(false);
+
     }
 
     @FXML
     private void Show_Add(ActionEvent event) {
-        add.setVisible(true);
-        Main.setVisible(false);
+         add.setVisible(true);
+       Main.setVisible(false);
     }
 
     @FXML
     private void Detail_Click(ActionEvent event) {
-        
+           add.setVisible(true);
+       Main.setVisible(false);
     }
     
      @FXML
@@ -203,6 +213,15 @@ public class FXMLDocumentController implements Initializable {
              WarningL.setText("txt file not found or error with writing");
         }
 
+    }
+
+    @FXML
+    private void rent_click(ActionEvent event) {
+         rentalP.setVisible(true);
+    }
+
+    @FXML
+    private void print_click(ActionEvent event) {
     }
 }
 

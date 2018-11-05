@@ -18,8 +18,8 @@
       <Text fx:id="WarningL" layoutX="74.0" layoutY="509.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="168.13671875" />
       <Pane fx:id="add" layoutX="27.0" layoutY="24.0" prefHeight="496.0" prefWidth="295.0">
          <children>
-            <Button fx:id="Back" layoutX="229.0" layoutY="457.0" mnemonicParsing="false" onAction="#Back_Click" text="Back" />
-            <Button fx:id="AddB" layoutX="176.0" layoutY="457.0" mnemonicParsing="false" onAction="#AddVehicles_Click" text="Add" />
+            <Button fx:id="Back" layoutX="241.0" layoutY="470.0" mnemonicParsing="false" onAction="#Back_Click" text="Back" />
+            <Button fx:id="AddB" layoutX="196.0" layoutY="470.0" mnemonicParsing="false" onAction="#AddVehicles_Click" text="Add" />
             <TextField fx:id="ManufactorT" layoutX="133.0" layoutY="29.0" />
             <Label layoutX="37.0" layoutY="33.0" text="ManuFactor" />
             <Label layoutX="55.0" layoutY="74.0" text="Model" />
@@ -38,13 +38,15 @@
             <TextField fx:id="LastServiceT" layoutX="133.0" layoutY="280.0" />
             <TextField fx:id="ServiceT" layoutX="133.0" layoutY="326.0" />
             <TextField fx:id="LastServiceDateT" layoutX="133.0" layoutY="370.0" />
-            <Button fx:id="RentB" layoutX="107.0" layoutY="457.0" mnemonicParsing="false" onAction="#rent_click" text="Rent Out" />
+            <Button fx:id="RentB" layoutX="117.0" layoutY="470.0" mnemonicParsing="false" onAction="#rent_click" text="Rent Out" />
             <Text layoutX="26.0" layoutY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicles Details">
                <font>
                   <Font size="22.0" />
                </font>
             </Text>
-            <CheckBox fx:id="RS" layoutX="134.0" layoutY="412.0" mnemonicParsing="false" text="Requires Service" />
+            <CheckBox fx:id="RS" layoutX="142.0" layoutY="442.0" mnemonicParsing="false" text="Requires Service" />
+            <Text layoutX="39.0" layoutY="424.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuel Economy" />
+            <TextField fx:id="FuelE" layoutX="133.0" layoutY="407.0" />
          </children>
       </Pane>
       <Pane fx:id="Main" layoutX="14.0" layoutY="27.0" prefHeight="469.0" prefWidth="651.0" visible="false">
@@ -71,7 +73,7 @@
       </Pane>
       <Pane fx:id="rentalP" layoutX="361.0" layoutY="32.0" prefHeight="481.0" prefWidth="304.0">
          <children>
-            <Button layoutX="227.0" layoutY="430.0" mnemonicParsing="false" onAction="#print_click" text="Print " />
+            <Button layoutX="246.0" layoutY="430.0" mnemonicParsing="false" onAction="#print_click" text="Print " />
             <RadioButton fx:id="km" layoutX="32.0" layoutY="94.0" mnemonicParsing="false" text="\$1 per Km" />
             <RadioButton fx:id="day" layoutX="138.0" layoutY="94.0" mnemonicParsing="false" text="\$100 per day" />
             <TextField fx:id="Days" layoutX="153.0" layoutY="140.0" />
@@ -87,10 +89,8 @@
             <DatePicker fx:id="Collection" layoutX="128.0" layoutY="252.0" />
             <Label layoutX="27.0" layoutY="220.0" text="Renting Car Out" />
             <Label layoutX="23.0" layoutY="256.0" text="Collection of Car" />
-            <TextField fx:id="FuelE" layoutX="153.0" layoutY="324.0" />
             <TextField fx:id="CostF" layoutX="153.0" layoutY="356.0" />
             <TextField fx:id="LitresF" layoutX="153.0" layoutY="385.0" />
-            <Text layoutX="30.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuel Economy" />
             <Text layoutX="34.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost Of Fuel" />
             <Text layoutX="16.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How many Litres of Fuel" />
             <Text fill="#e42d2d" layoutX="12.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If It's Required Below">
@@ -98,6 +98,8 @@
                   <Font size="18.0" />
                </font>
             </Text>
+            <TextField fx:id="FileName" layoutX="88.0" layoutY="430.0" />
+            <Label layoutX="23.0" layoutY="434.0" text="FileName" />
          </children>
       </Pane>
     </children>

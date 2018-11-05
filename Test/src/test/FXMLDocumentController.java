@@ -5,8 +5,11 @@
  */
 package test;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
@@ -93,6 +96,7 @@ public class FXMLDocumentController implements Initializable {
   public ObservableList<Vehicle> Tasksdata;
   Service s = new Service();
   Rental R = new Rental();
+
     @FXML
     private Button AddB;
     @FXML
@@ -119,6 +123,8 @@ public class FXMLDocumentController implements Initializable {
     private TextField CostF;
     @FXML
     private TextField LitresF;
+    @FXML
+    private TextField FileName;
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -184,8 +190,9 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void print_click(ActionEvent event) {
-        rentalCost();
+    private void print_click(ActionEvent event) throws IOException  {
+       rentalPrint();
+       
     }
     
     /**
@@ -201,25 +208,30 @@ public class FXMLDocumentController implements Initializable {
             String model = inFile.next();
             int makeYear =   Integer.parseInt(inFile.next()); 
             String RegistrationNo =  inFile.next(); 
-            int OdometerReadingKm = Integer.parseInt(inFile.next());
+           double OdometerReadingKm = Double.parseDouble(inFile.next());
             int TankCapacityL = Integer.parseInt(inFile.next());
             int LastService0 = Integer.parseInt(inFile.next());
             int ServiceCourt = Integer.parseInt(inFile.next());
             String Date = inFile.next();
-              boolean RS = inFile.nextBoolean();
+              boolean RS = Boolean.parseBoolean(inFile.next());
+            double FE = Double.parseDouble(inFile.next());
+           list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date , RS, FE));
+            } 
             
-           list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date , RS));
-            }
             ObservableList<Vehicle> Tasksdata = FXCollections.observableArrayList(list);
-            Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+          Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
             Model.setCellValueFactory(new PropertyValueFactory<>("model"));
             MakeYear.setCellValueFactory(new PropertyValueFactory<>("makeYear"));
              Registration.setCellValueFactory(new PropertyValueFactory<>("RegistrationNo"));
              Odometre.setCellValueFactory(new PropertyValueFactory<>("OdometerReadingKm"));
              Tank.setCellValueFactory(new PropertyValueFactory<>("TankCapacityL"));
-                TableView.setItems(Tasksdata);
-        } catch (FileNotFoundException ex) {
+               TableView.setItems(Tasksdata);
+               
+        } catch (FileNotFoundException ex) { //errors messages
           JOptionPane.showMessageDialog(null, "txt file not found or there is a space in the txt file");
+          
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "There was a problem with loading the txt file into this page");
         }
      
     } 
@@ -233,14 +245,14 @@ public class FXMLDocumentController implements Initializable {
             String model = ModelT.getText();
             int makeYear =   Integer.parseInt(MakeYearT.getText()); 
             String RegistrationNo =  RegistrationT.getText(); 
-            int OdometerReadingKm = Integer.parseInt(OdometreT.getText());
+            double OdometerReadingKm = Double.parseDouble(OdometreT.getText());
             int TankCapacityL = Integer.parseInt(TankCT.getText());
             int LastService0 = Integer.parseInt(LastServiceT.getText());
             int ServiceCourt = Integer.parseInt(ServiceT.getText());
             String Date = LastServiceDateT.getText();
             boolean RService = RS.isSelected();
-            
-           list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date, RService));
+            double FE = Double.parseDouble(FuelE.getText());
+           list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date, RService, FE));
         
             ObservableList<Vehicle> Tasksdata = FXCollections.observableArrayList(list);
           Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
@@ -257,13 +269,14 @@ public class FXMLDocumentController implements Initializable {
  * write in new information to txt file
  */
     public void writerTxt() {
+        FuelPurchase fuelPurchase;
        try (PrintWriter outfile = new PrintWriter("src\\test\\Vehicle.txt")) {
 
        for (int i = 0; i < list.size(); i++) {
         
          outfile.println(list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " " + list.get(i).getRegistrationNo()
                         + " " + list.get(i).getOdometerReadingKm() + " " + list.get(i).getTankCapacityL() + " "+ list.get(i).s.lastServiceOdometerKm + " " + list.get(i).s.serviceCount
-                        + " " + list.get(i).s.lastServiceDate + " " + list.get(i).s.RequiredService);
+                        + " " + list.get(i).s.lastServiceDate + " " + list.get(i).s.RequiredService + " " + list.get(i).fuelPurchase.getFuelEconomy());
                         
 		}
           
@@ -284,13 +297,13 @@ public class FXMLDocumentController implements Initializable {
              ModelT.setText(list.get(p).getModel());
             MakeYearT.setText(Integer.toString(list.get(p).getMakeYear()));  
              RegistrationT.setText(list.get(p).getRegistrationNo()); 
-             OdometreT.setText(Integer.toString(list.get(p).getOdometerReadingKm()));
+             OdometreT.setText(Double.toString(list.get(p).getOdometerReadingKm()));
             TankCT.setText(Integer.toString(list.get(p).getTankCapacityL()));
              LastServiceT.setText(Integer.toString(list.get(p).s.lastServiceOdometerKm));
              ServiceT.setText(Integer.toString(list.get(p).s.serviceCount));
              LastServiceDateT.setText(list.get(p).s.lastServiceDate);
              RS.setSelected(list.get(p).s.RequiredService);
-        
+            FuelE.setText(Double.toString(list.get(p).fuelPurchase.getFuelEconomy()));
     }
     /**
      * Reset all text boxes
@@ -319,18 +332,54 @@ public class FXMLDocumentController implements Initializable {
     /**
      * Get rental Costs
      */
-    public void rentalCost(){
+    public int rentalCost(){
         
         if( day.isSelected()== true){
             R.setAmount(Integer.parseInt(Days.getText()));
             R.getRentalCostDays();
+              return R.getAmount();
         }
         else if (km.isSelected() == true){
             R.setAmount(Integer.parseInt(Km.getText()));
             R.getRentalCostKm();
+              return R.getAmount();
         }else{
              JOptionPane.showMessageDialog(null, "Select Payment Method");
+                  return 0;
         }
+    }
+    /**
+     * Print out information on rented out car
+     * @throws IOException 
+     */
+    public void rentalPrint() throws IOException{
+         int i =  TableView.getSelectionModel().getSelectedIndex();
+         //Add kilometres
+         //Journey J = new Journey();
+        // J.setKilometers(list.get(i).getOdometerReadingKm());
+        // J.addKilometers(Double.parseDouble(Km.getText()));
+      
+       
+                 
+        File file = new File("c://temp//" + FileName.getText() + ".txt");
+  
+        //Create the file
+        if (file.createNewFile())
+        {
+         JOptionPane.showMessageDialog(null, "File is created!");
+        } else {
+            JOptionPane.showMessageDialog(null, "File already exists.");
+    }
+ 
+        //Write Content
+        FileWriter writer = new FileWriter(file);
+        writer.write(("Vehicle: " + list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " " + list.get(i).getRegistrationNo()));
+           writer.write(("Odometer Reading: " + list.get(i).getOdometerReadingKm() + " TankCapacity: " + list.get(i).getTankCapacityL() + "L  ServiceCount:" + list.get(i).s.serviceCount
+                        + " LastServicedDate:" + list.get(i).s.lastServiceDate ));
+        writer.write("Between" + rentout.getValue().toString() + " - " + Collection.getValue().toString());
+         writer.write("Cost: $" + rentalCost());
+      writer.write("FuelEconomy " + Double.toString(list.get(i).fuelPurchase.getFuelEconomy()));
+        writer.close();
     }
 }
 

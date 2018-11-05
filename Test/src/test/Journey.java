@@ -27,6 +27,9 @@ public class Journey {
 		this.kilometers += kilometers;
 	}
 
+        public void setKilometers(double Km){
+            this.kilometers = Km;
+        }
 
 
 	/**

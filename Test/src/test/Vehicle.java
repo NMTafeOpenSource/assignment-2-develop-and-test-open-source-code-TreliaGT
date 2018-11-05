@@ -14,11 +14,13 @@ public final class Vehicle {
 	private String	model;
 	private int	makeYear;
         private String RegistrationNo; 
-       private int OdometerReadingKm; 
+       private double OdometerReadingKm; 
         private int TankCapacityL;
                
-	private final FuelPurchase fuelPurchase;
+	public FuelPurchase fuelPurchase = new FuelPurchase();
      public Service s = new Service();
+     
+     
 	/**
 	 * Class constructor specifying name of make (manufacturer), model and year
 	 * of make.
@@ -26,18 +28,23 @@ public final class Vehicle {
 	 * @param model
 	 * @param makeYear
          * @param RegistrationNo
+         * @param LastService0
+         * @param Date
+         * @param ServiceCourt
+         * @param RS
+         * @param FuelE
 	 */
-	public Vehicle(String manufacturer, String model, int makeYear, String RegistrationNo,int OdometerReadingKm, int TankCapacityL
-        ,int LastService0, int ServiceCourt, String Date, boolean RS) {
+	public Vehicle(String manufacturer, String model, int makeYear, String RegistrationNo,double OdometerReadingKm, int TankCapacityL
+        ,int LastService0, int ServiceCourt, String Date, boolean RS, double FuelE) {
 		setmanufacturer(manufacturer);
 		setModel(model);
 		setMakeYear(makeYear);
                 setRegistrationNo(RegistrationNo);
                 setOdometerReadingKm(OdometerReadingKm);
                 setTankCapacityL(TankCapacityL);
-		fuelPurchase = new FuelPurchase();
                 s.recordedService(LastService0,Date, ServiceCourt);
                 s.RequiredService = RS;
+                fuelPurchase.setFuelEconomy(FuelE);
 	}
         
         
@@ -71,10 +78,10 @@ public final class Vehicle {
         this.RegistrationNo = fRegistrationNo;
     }
     
-      public int getOdometerReadingKm(){
+      public double getOdometerReadingKm(){
         return this.OdometerReadingKm;
     }
-   public void setOdometerReadingKm(int fOdometerReadingKm){
+   public void setOdometerReadingKm(double fOdometerReadingKm){
         this.OdometerReadingKm = fOdometerReadingKm;
     }
   

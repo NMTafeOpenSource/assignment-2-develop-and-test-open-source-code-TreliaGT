@@ -28,9 +28,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import java.lang.String;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
+import javax.swing.JOptionPane;
+import static sun.management.Agent.error;
 /**
  *
  * @author V244682
@@ -92,6 +96,12 @@ public class FXMLDocumentController implements Initializable {
     private Button RentB;
     @FXML
     private Pane rentalP;
+    @FXML
+    private RadioButton km;
+    @FXML
+    private RadioButton day;
+    @FXML
+    private CheckBox RS;
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -108,23 +118,29 @@ public class FXMLDocumentController implements Initializable {
           add.setVisible(false);
           Main.setVisible(true);
           rentalP.setVisible(false);
-
+            reset();
     }
 
     @FXML
     private void Show_Add(ActionEvent event) {
          add.setVisible(true);
        Main.setVisible(false);
+        RentB.setVisible(false);
+            AddB.setVisible(true);
     }
 
     @FXML
     private void Detail_Click(ActionEvent event) {
-           add.setVisible(true);
-       Main.setVisible(false);
+            add.setVisible(true);
+            Main.setVisible(false);
+            RentB.setVisible(true);
+            AddB.setVisible(false);
+            print_Details();
     }
     
      @FXML
     private void Delete_Click(ActionEvent event) {
+        try{
         list.remove(TableView.getSelectionModel().getSelectedIndex());
            Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
        Model.setCellValueFactory(new PropertyValueFactory<>("model"));
@@ -134,9 +150,24 @@ public class FXMLDocumentController implements Initializable {
        Tank.setCellValueFactory(new PropertyValueFactory<>("TankCapacityL"));
         TableView.setItems(Tasksdata);
         writerTxt();
+        }catch(Exception e){
+              JOptionPane.showMessageDialog(null, "Please Click on what Vehicle You Wish To Delete");
+           
+        }
     }
     
-    //get vehicles from txt file
+      @FXML
+    private void rent_click(ActionEvent event) {
+         rentalP.setVisible(true);
+    }
+
+    @FXML
+    private void print_click(ActionEvent event) {
+    }
+    
+    /**
+     * Get vehicles from txt file
+     */
     public void getVehicles(){
             
         try {
@@ -152,8 +183,9 @@ public class FXMLDocumentController implements Initializable {
             int LastService0 = Integer.parseInt(inFile.next());
             int ServiceCourt = Integer.parseInt(inFile.next());
             String Date = inFile.next();
+              boolean RS = inFile.nextBoolean();
             
-           list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date ));
+           list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date , RS));
             }
             ObservableList<Vehicle> Tasksdata = FXCollections.observableArrayList(list);
             Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
@@ -164,13 +196,15 @@ public class FXMLDocumentController implements Initializable {
              Tank.setCellValueFactory(new PropertyValueFactory<>("TankCapacityL"));
                 TableView.setItems(Tasksdata);
         } catch (FileNotFoundException ex) {
-             WarningL.setVisible(true);
-             WarningL.setText("txt file not found or there is a space in the txt file");
+          JOptionPane.showMessageDialog(null, "txt file not found or there is a space in the txt file");
         }
      
     } 
-
-    @FXML //Add vehicles to tableview
+/**
+ * Add Vehicle then use another method to add vehicle to txt file
+ * @param event 
+ */
+    @FXML 
     private void AddVehicles_Click(ActionEvent event) {
              String  manufacturer = ManufactorT.getText() ;
             String model = ModelT.getText();
@@ -181,8 +215,9 @@ public class FXMLDocumentController implements Initializable {
             int LastService0 = Integer.parseInt(LastServiceT.getText());
             int ServiceCourt = Integer.parseInt(ServiceT.getText());
             String Date = LastServiceDateT.getText();
+            boolean RService = RS.isSelected();
             
-           list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date ));
+           list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date, RService));
         
             ObservableList<Vehicle> Tasksdata = FXCollections.observableArrayList(list);
           Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
@@ -195,7 +230,9 @@ public class FXMLDocumentController implements Initializable {
        
         writerTxt();
     }
-
+/**
+ * write in new information to txt file
+ */
     public void writerTxt() {
        try (PrintWriter outfile = new PrintWriter("src\\test\\Vehicle.txt")) {
 
@@ -203,25 +240,47 @@ public class FXMLDocumentController implements Initializable {
         
          outfile.println(list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " " + list.get(i).getRegistrationNo()
                         + " " + list.get(i).getOdometerReadingKm() + " " + list.get(i).getTankCapacityL() + " "+ list.get(i).s.lastServiceOdometerKm + " " + list.get(i).s.serviceCount
-                        + " " + list.get(i).s.lastServiceDate);
+                        + " " + list.get(i).s.lastServiceDate + " " + list.get(i).s.RequiredService);
                         
 		}
           
            getVehicles();
        }catch (FileNotFoundException ex) {
-             WarningL.setVisible(true);
-             WarningL.setText("txt file not found or error with writing");
+              JOptionPane.showMessageDialog(null, "txt file not found or error with writin");
         }
 
     }
 
-    @FXML
-    private void rent_click(ActionEvent event) {
-         rentalP.setVisible(true);
+  
+    /**
+     * show details on details page
+     */
+    public void print_Details(){
+     int p =  TableView.getSelectionModel().getSelectedIndex();
+          ManufactorT.setText(list.get(p).getManufacturer());
+             ModelT.setText(list.get(p).getModel());
+            MakeYearT.setText(Integer.toString(list.get(p).getMakeYear()));  
+             RegistrationT.setText(list.get(p).getRegistrationNo()); 
+             OdometreT.setText(Integer.toString(list.get(p).getOdometerReadingKm()));
+            TankCT.setText(Integer.toString(list.get(p).getTankCapacityL()));
+             LastServiceT.setText(Integer.toString(list.get(p).s.lastServiceOdometerKm));
+             ServiceT.setText(Integer.toString(list.get(p).s.serviceCount));
+             LastServiceDateT.setText(list.get(p).s.lastServiceDate);
+             RS.setSelected(list.get(p).s.RequiredService);
+        
     }
-
-    @FXML
-    private void print_click(ActionEvent event) {
+    
+    public void reset(){
+         ManufactorT.setText("");
+             ModelT.setText("");
+            MakeYearT.setText("");  
+             RegistrationT.setText(""); 
+             OdometreT.setText("");
+            TankCT.setText("");
+             LastServiceT.setText("");
+             ServiceT.setText("");
+             LastServiceDateT.setText("");
+             RS.setSelected(false);
     }
 }
 

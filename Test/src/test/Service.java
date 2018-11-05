@@ -16,6 +16,7 @@ public class Service {
    public int lastServiceOdometerKm=0;
     public int serviceCount=0;
    public String lastServiceDate = "Unknown";
+   public boolean RequiredService = false;
     
     // return the last service
     public int getLastServiceOdometerKm()

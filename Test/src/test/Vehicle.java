@@ -28,7 +28,7 @@ public final class Vehicle {
          * @param RegistrationNo
 	 */
 	public Vehicle(String manufacturer, String model, int makeYear, String RegistrationNo,int OdometerReadingKm, int TankCapacityL
-        ,int LastService0, int ServiceCourt, String Date) {
+        ,int LastService0, int ServiceCourt, String Date, boolean RS) {
 		setmanufacturer(manufacturer);
 		setModel(model);
 		setMakeYear(makeYear);
@@ -37,7 +37,7 @@ public final class Vehicle {
                 setTankCapacityL(TankCapacityL);
 		fuelPurchase = new FuelPurchase();
                 s.recordedService(LastService0,Date, ServiceCourt);
-       
+                s.RequiredService = RS;
 	}
         
         

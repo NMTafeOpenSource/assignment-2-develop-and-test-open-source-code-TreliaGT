@@ -27,8 +27,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import java.lang.String;
+import java.time.LocalDate;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -90,6 +92,7 @@ public class FXMLDocumentController implements Initializable {
     
   public ObservableList<Vehicle> Tasksdata;
   Service s = new Service();
+  Rental R = new Rental();
     @FXML
     private Button AddB;
     @FXML
@@ -102,6 +105,20 @@ public class FXMLDocumentController implements Initializable {
     private RadioButton day;
     @FXML
     private CheckBox RS;
+    @FXML
+    private TextField Days;
+    @FXML
+    private TextField Km;
+    @FXML
+    private DatePicker rentout;
+    @FXML
+    private DatePicker Collection;
+    @FXML
+    private TextField FuelE;
+    @FXML
+    private TextField CostF;
+    @FXML
+    private TextField LitresF;
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -156,13 +173,19 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
-      @FXML
-    private void rent_click(ActionEvent event) {
-         rentalP.setVisible(true);
+      @FXML 
+    private void rent_click(ActionEvent event) {//if car needs service
+         //if car needs service not about to rent
+         if(RS.isSelected() == true){
+              JOptionPane.showMessageDialog(null, "This car needs Service");
+         }else{
+             rentalP.setVisible(true);
+         }
     }
 
     @FXML
     private void print_click(ActionEvent event) {
+        rentalCost();
     }
     
     /**
@@ -269,7 +292,9 @@ public class FXMLDocumentController implements Initializable {
              RS.setSelected(list.get(p).s.RequiredService);
         
     }
-    
+    /**
+     * Reset all text boxes
+     */
     public void reset(){
          ManufactorT.setText("");
              ModelT.setText("");
@@ -281,6 +306,31 @@ public class FXMLDocumentController implements Initializable {
              ServiceT.setText("");
              LastServiceDateT.setText("");
              RS.setSelected(false);
+             Km.setText("");
+             Days.setText("");
+             rentout.setValue(null);
+             Collection.setValue(null);
+             day.setSelected(false);
+             km.setSelected(false);
+             FuelE.setText("");
+             CostF.setText("");
+             LitresF.setText("");
+    }
+    /**
+     * Get rental Costs
+     */
+    public void rentalCost(){
+        
+        if( day.isSelected()== true){
+            R.setAmount(Integer.parseInt(Days.getText()));
+            R.getRentalCostDays();
+        }
+        else if (km.isSelected() == true){
+            R.setAmount(Integer.parseInt(Km.getText()));
+            R.getRentalCostKm();
+        }else{
+             JOptionPane.showMessageDialog(null, "Select Payment Method");
+        }
     }
 }
 

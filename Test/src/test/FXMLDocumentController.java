@@ -211,7 +211,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void UpdateS_Click(ActionEvent event) {
-        updatingRent();
+        updatingService();
     }
 
     @FXML
@@ -431,8 +431,23 @@ public class FXMLDocumentController implements Initializable {
                         , list.get(i).s.lastServiceDate , list.get(i).s.RequiredService , list.get(i).fuelPurchase.getFuelEconomy() , Revenuerecorded)); 
        writerTxt(); //rewrite file to update the data
     }
-
-
+    
+    /**
+     * Updating service information
+     */
+    public void updatingService(){
+         int i =  TableView.getSelectionModel().getSelectedIndex();
+         
+         //service
+          s.serviceCount = list.get(i).s.serviceCount;
+         s.recordService(Integer.parseInt(UpDateOdo.getText()), DateS.getText());
+         
+      list.set(i, new Vehicle(list.get(i).getManufacturer() , list.get(i).getModel() , list.get(i).getMakeYear() , list.get(i).getRegistrationNo()
+                        , list.get(i).getOdometerReadingKm() , list.get(i).getTankCapacityL() , s.lastServiceOdometerKm , s.serviceCount
+                        , s.lastServiceDate , list.get(i).s.RequiredService , list.get(i).fuelPurchase.getFuelEconomy() , list.get(i).getRevenuerecorded())); 
+       writerTxt();
+    }
+    
     
 }
 

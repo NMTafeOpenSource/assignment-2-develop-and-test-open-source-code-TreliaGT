@@ -16,8 +16,9 @@ public final class Vehicle {
         private String RegistrationNo; 
        private double OdometerReadingKm; 
         private int TankCapacityL;
+        private double Revenuerecorded;
                
-	public FuelPurchase fuelPurchase = new FuelPurchase();
+     public FuelPurchase fuelPurchase = new FuelPurchase();
      public Service s = new Service();
      
      
@@ -35,7 +36,7 @@ public final class Vehicle {
          * @param FuelE
 	 */
 	public Vehicle(String manufacturer, String model, int makeYear, String RegistrationNo,double OdometerReadingKm, int TankCapacityL
-        ,int LastService0, int ServiceCourt, String Date, boolean RS, double FuelE) {
+        ,int LastService0, int ServiceCourt, String Date, boolean RS, double FuelE, double Costmade) {
 		setmanufacturer(manufacturer);
 		setModel(model);
 		setMakeYear(makeYear);
@@ -45,6 +46,7 @@ public final class Vehicle {
                 s.recordedService(LastService0,Date, ServiceCourt);
                 s.RequiredService = RS;
                 fuelPurchase.setFuelEconomy(FuelE);
+                setRevenuerecorded(Costmade);
 	}
         
         
@@ -90,6 +92,12 @@ public final class Vehicle {
     }
     public void setTankCapacityL(int fTankCapacityL){
         this.TankCapacityL = fTankCapacityL;
+    }
+       public double getRevenuerecorded(){
+        return this.Revenuerecorded;
+    }
+    public void setRevenuerecorded(double fRevenuerecorded){
+        this.Revenuerecorded = fRevenuerecorded;
     }
         
 	/**

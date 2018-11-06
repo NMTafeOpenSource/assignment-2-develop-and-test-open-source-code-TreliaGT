@@ -10,23 +10,29 @@ package test;
  * @author Trelia
  */
 public class Rental {
-    private final int Days = 100;
-    private final int Km = 1;
-    private int Amount;
-    private int Total;
+    private final double Days = 100;
+    private final double Km = 1;
+    private double Amount;
+    private double Total;
     
-  public int getAmount(){
+    //setters & getters
+  public double getAmount(){
         return this.Amount;
     }
-    public void setAmount(int fAmount){
+    public void setAmount(double fAmount){
         this.Amount = fAmount;
     }
     
-    public int getRentalCostDays(){
+    //rental for days
+    public double getRentalCostDays(){
         return Amount * Days;
     }
-    
-     public int getRentalCostKm(){
+    //rental for per km
+     public double getRentalCostKm(){
         return Amount * Km;
     }
+     //total Revenue Recorded
+     public double getTotal(double made){
+        return made += Amount;
+     }
 }

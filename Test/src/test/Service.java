@@ -30,13 +30,6 @@ public class Service {
      * @param distance 
      * @param date 
      */
-    public void recordedService(int distance, String date, int count)
-    {
-        this.lastServiceOdometerKm = distance;
-        this.serviceCount= count;
-        this.lastServiceDate = date;
-    }
-    
       public void recordService(int distance, String date)
     {
         this.lastServiceOdometerKm = distance;
@@ -59,6 +52,8 @@ public class Service {
     {
         return this.lastServiceOdometerKm;
     }
+      
+    
     
     /**
      * Calculates the total services by dividing kilometers by
@@ -69,4 +64,6 @@ public class Service {
     public int getTotalScheduledServices() {
             return (int) Math.floor(lastServiceOdometerKm / SERVICE_KILOMETER_LIMIT);
     } 
+    
+    
 }

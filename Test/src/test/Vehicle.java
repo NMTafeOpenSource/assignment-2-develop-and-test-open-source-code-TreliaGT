@@ -31,19 +31,21 @@ public final class Vehicle {
          * @param RegistrationNo
          * @param LastService0
          * @param Date
-         * @param ServiceCourt
          * @param RS
+         * @param SC
          * @param FuelE
+         * @param Costmade
 	 */
 	public Vehicle(String manufacturer, String model, int makeYear, String RegistrationNo,double OdometerReadingKm, int TankCapacityL
-        ,int LastService0, int ServiceCourt, String Date, boolean RS, double FuelE, double Costmade) {
+        ,int LastService0, int SC , String Date, boolean RS, double FuelE, double Costmade) {
 		setmanufacturer(manufacturer);
 		setModel(model);
 		setMakeYear(makeYear);
                 setRegistrationNo(RegistrationNo);
                 setOdometerReadingKm(OdometerReadingKm);
                 setTankCapacityL(TankCapacityL);
-                s.recordedService(LastService0,Date, ServiceCourt);
+                s.recordService(LastService0,Date);
+                s.serviceCount = SC;
                 s.RequiredService = RS;
                 fuelPurchase.setFuelEconomy(FuelE);
                 setRevenuerecorded(Costmade);

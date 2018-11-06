@@ -59,8 +59,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Pane add;
     @FXML
-    private Text WarningL;
-    @FXML
     private TableView<Vehicle> TableView;
     @FXML
     private TableColumn<Vehicle, String> Manufactor;
@@ -92,11 +90,6 @@ public class FXMLDocumentController implements Initializable {
     private TextField ServiceT;
     @FXML
     private TextField LastServiceDateT;
-    
-  public ObservableList<Vehicle> Tasksdata;
-  Service s = new Service();
-  Rental R = new Rental();
-
     @FXML
     private Button AddB;
     @FXML
@@ -127,14 +120,28 @@ public class FXMLDocumentController implements Initializable {
     private TextField FileName;
     @FXML
     private TextField MadeCost;
+    @FXML
+    private Button Service;
+    @FXML
+    private TextField UpDateOdo;
+    @FXML
+    private TextField DateS;
+    @FXML
+    private Button close;
+    @FXML
+    private Pane ServiceP;
   
+    public ObservableList<Vehicle> Tasksdata;
+    Service s = new Service();
+    Rental R = new Rental();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
        add.setVisible(false);
        Main.setVisible(true);
-        WarningL.setVisible(false); 
         rentalP.setVisible(false);
+        ServiceP.setVisible(false);
        getVehicles();
     }    
 
@@ -143,6 +150,7 @@ public class FXMLDocumentController implements Initializable {
           add.setVisible(false);
           Main.setVisible(true);
           rentalP.setVisible(false);
+          ServiceP.setVisible(false);
             reset();
     }
 
@@ -196,6 +204,22 @@ public class FXMLDocumentController implements Initializable {
        rentalPrint();
        
     }
+    @FXML
+    private void Service_Click(ActionEvent event) {
+            ServiceP.setVisible(true);
+    }
+
+    @FXML
+    private void UpdateS_Click(ActionEvent event) {
+        updatingRent();
+    }
+
+    @FXML
+    private void Close_Click(ActionEvent event) {
+            ServiceP.setVisible(false);
+            
+            
+    }
     
     /**
      * Get vehicles from txt file
@@ -213,7 +237,8 @@ public class FXMLDocumentController implements Initializable {
            double OdometerReadingKm = Double.parseDouble(inFile.next());
             int TankCapacityL = Integer.parseInt(inFile.next());
             int LastService0 = Integer.parseInt(inFile.next());
-            int ServiceCourt = Integer.parseInt(inFile.next());
+            s.lastServiceOdometerKm = LastService0;
+            int ServiceCourt = s.getTotalScheduledServices();
             String Date = inFile.next();
               boolean RS = Boolean.parseBoolean(inFile.next());
             double FE = Double.parseDouble(inFile.next());
@@ -273,7 +298,7 @@ public class FXMLDocumentController implements Initializable {
  * write in new information to txt file
  */
     public void writerTxt() {
-        FuelPurchase fuelPurchase;
+      
        try (PrintWriter outfile = new PrintWriter("src\\test\\Vehicle.txt")) {
 
        for (int i = 0; i < list.size(); i++) {
@@ -333,19 +358,22 @@ public class FXMLDocumentController implements Initializable {
              FuelE.setText("");
              CostF.setText("");
              LitresF.setText("");
+             UpDateOdo.setText("");
+             DateS.setText("");
     }
     /**
      * Get rental Costs
+     * @return 
      */
-    public int rentalCost(){
+    public double rentalCost(){
         
         if( day.isSelected()== true){
-            R.setAmount(Integer.parseInt(Days.getText()));
+            R.setAmount(Double.parseDouble(Days.getText()));
             R.getRentalCostDays();
               return R.getAmount();
         }
         else if (km.isSelected() == true){
-            R.setAmount(Integer.parseInt(Km.getText()));
+            R.setAmount(Double.parseDouble(Km.getText()));
             R.getRentalCostKm();
               return R.getAmount();
         }else{
@@ -358,14 +386,7 @@ public class FXMLDocumentController implements Initializable {
      * @throws IOException 
      */
     public void rentalPrint() throws IOException{
-         int i =  TableView.getSelectionModel().getSelectedIndex();
-         //Add kilometres
-         //Journey J = new Journey();
-        // J.setKilometers(list.get(i).getOdometerReadingKm());
-        // J.addKilometers(Double.parseDouble(Km.getText()));
-      
-       
-                 
+  int i =  TableView.getSelectionModel().getSelectedIndex();
         File file = new File("c://temp//" + FileName.getText() + ".txt");
   
         //Create the file
@@ -378,14 +399,41 @@ public class FXMLDocumentController implements Initializable {
  
         //Write Content
         FileWriter writer = new FileWriter(file);
-        writer.write(("Vehicle: " + list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " " + list.get(i).getRegistrationNo()));
+        writer.write(("Vehicle: " + list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " Registration" + list.get(i).getRegistrationNo()));
            writer.write(("Odometer Reading: " + list.get(i).getOdometerReadingKm() + " TankCapacity: " + list.get(i).getTankCapacityL() + "L  ServiceCount:" + list.get(i).s.serviceCount
                         + " LastServicedDate:" + list.get(i).s.lastServiceDate ));
         writer.write("Between" + rentout.getValue().toString() + " - " + Collection.getValue().toString());
          writer.write("Cost: $" + rentalCost());
       writer.write("FuelEconomy " + Double.toString(list.get(i).fuelPurchase.getFuelEconomy()));
         writer.close();
+         JOptionPane.showMessageDialog(null, "Select Payment Method");
+        updatingRent();
     }
+    /**
+     * Updating information after printing informations
+     */
+    public void updatingRent(){
+          int i =  TableView.getSelectionModel().getSelectedIndex();
+             //Get new OdometerReading
+         Journey J = new Journey();
+      J.setKilometers(list.get(i).getOdometerReadingKm());
+      J.addKilometers(Double.parseDouble(Km.getText()));
+      
+      //new fuel Fuel Economy
+      FuelPurchase FP = new FuelPurchase();
+      
+      
+      //new Revenuerecorded
+      double Revenuerecorded = list.get(i).getRevenuerecorded() + rentalCost();
+      
+       list.set(i, new Vehicle(list.get(i).getManufacturer() , list.get(i).getModel() , list.get(i).getMakeYear() , list.get(i).getRegistrationNo()
+                        , J.getKilometers() , list.get(i).getTankCapacityL() , list.get(i).s.lastServiceOdometerKm , list.get(i).s.serviceCount
+                        , list.get(i).s.lastServiceDate , list.get(i).s.RequiredService , list.get(i).fuelPurchase.getFuelEconomy() , Revenuerecorded)); 
+       writerTxt(); //rewrite file to update the data
+    }
+
+
+    
 }
 
 

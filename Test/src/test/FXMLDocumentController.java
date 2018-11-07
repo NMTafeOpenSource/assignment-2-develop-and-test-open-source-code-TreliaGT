@@ -151,11 +151,13 @@ public class FXMLDocumentController implements Initializable {
           Main.setVisible(true);
           rentalP.setVisible(false);
           ServiceP.setVisible(false);
+          ServiceT.setDisable(false);
             reset();
     }
 
     @FXML
     private void Show_Add(ActionEvent event) {
+            ServiceT.setDisable(true);
          add.setVisible(true);
        Main.setVisible(false);
         RentB.setVisible(false);
@@ -191,6 +193,7 @@ public class FXMLDocumentController implements Initializable {
     
       @FXML 
     private void rent_click(ActionEvent event) {//if car needs service
+         ServiceP.setVisible(false);
          //if car needs service not about to rent
          if(RS.isSelected() == true){
               JOptionPane.showMessageDialog(null, "This car needs Service");
@@ -207,6 +210,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void Service_Click(ActionEvent event) {
             ServiceP.setVisible(true);
+              rentalP.setVisible(false);
     }
 
     @FXML
@@ -237,8 +241,7 @@ public class FXMLDocumentController implements Initializable {
            double OdometerReadingKm = Double.parseDouble(inFile.next());
             int TankCapacityL = Integer.parseInt(inFile.next());
             int LastService0 = Integer.parseInt(inFile.next());
-            s.lastServiceOdometerKm = LastService0;
-            int ServiceCourt = s.getTotalScheduledServices();
+            int ServiceCourt = Integer.parseInt(inFile.next());
             String Date = inFile.next();
               boolean RS = Boolean.parseBoolean(inFile.next());
             double FE = Double.parseDouble(inFile.next());
@@ -269,6 +272,7 @@ public class FXMLDocumentController implements Initializable {
  */
     @FXML 
     private void AddVehicles_Click(ActionEvent event) {
+    
              String  manufacturer = ManufactorT.getText() ;
             String model = ModelT.getText();
             int makeYear =   Integer.parseInt(MakeYearT.getText()); 
@@ -276,7 +280,8 @@ public class FXMLDocumentController implements Initializable {
             double OdometerReadingKm = Double.parseDouble(OdometreT.getText());
             int TankCapacityL = Integer.parseInt(TankCT.getText());
             int LastService0 = Integer.parseInt(LastServiceT.getText());
-            int ServiceCourt = Integer.parseInt(ServiceT.getText());
+             s.lastServiceOdometerKm = LastService0;
+            int ServiceCourt = s.getTotalScheduledServices();
             String Date = LastServiceDateT.getText();
             boolean RService = RS.isSelected();
             double FE = Double.parseDouble(FuelE.getText());
@@ -428,7 +433,7 @@ public class FXMLDocumentController implements Initializable {
       
        list.set(i, new Vehicle(list.get(i).getManufacturer() , list.get(i).getModel() , list.get(i).getMakeYear() , list.get(i).getRegistrationNo()
                         , J.getKilometers() , list.get(i).getTankCapacityL() , list.get(i).s.lastServiceOdometerKm , list.get(i).s.serviceCount
-                        , list.get(i).s.lastServiceDate , list.get(i).s.RequiredService , list.get(i).fuelPurchase.getFuelEconomy() , Revenuerecorded)); 
+                        , list.get(i).s.lastServiceDate ,  s.RequiredService(J.getKilometers() , list.get(i).s.serviceCount) , list.get(i).fuelPurchase.getFuelEconomy() , Revenuerecorded)); 
        writerTxt(); //rewrite file to update the data
     }
     
@@ -444,7 +449,7 @@ public class FXMLDocumentController implements Initializable {
          
       list.set(i, new Vehicle(list.get(i).getManufacturer() , list.get(i).getModel() , list.get(i).getMakeYear() , list.get(i).getRegistrationNo()
                         , list.get(i).getOdometerReadingKm() , list.get(i).getTankCapacityL() , s.lastServiceOdometerKm , s.serviceCount
-                        , s.lastServiceDate , list.get(i).s.RequiredService , list.get(i).fuelPurchase.getFuelEconomy() , list.get(i).getRevenuerecorded())); 
+                        , s.lastServiceDate , false , list.get(i).fuelPurchase.getFuelEconomy() , list.get(i).getRevenuerecorded())); 
        writerTxt();
     }
     

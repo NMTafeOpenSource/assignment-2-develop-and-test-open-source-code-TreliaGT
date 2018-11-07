@@ -65,5 +65,12 @@ public class Service {
             return (int) Math.floor(lastServiceOdometerKm / SERVICE_KILOMETER_LIMIT);
     } 
     
-    
+    public boolean RequiredService(double ODometreReading, int serviceCounts){
+      int odometre  = (int) Math.floor(ODometreReading / SERVICE_KILOMETER_LIMIT);
+      if (odometre == serviceCounts){
+          return false;
+      }else{
+          return true;  
+      }
+    }
 }

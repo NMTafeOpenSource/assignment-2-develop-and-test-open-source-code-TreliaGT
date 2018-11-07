@@ -10,7 +10,7 @@ package test;
  * @author V244682
  */
 public class FuelPurchase {
-        public double  fuelEconomy = 0;
+        private double  fuelEconomy = 0;
         private double litres = 0;
         private double cost = 0;
 

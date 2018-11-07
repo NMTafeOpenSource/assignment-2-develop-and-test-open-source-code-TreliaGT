@@ -325,12 +325,8 @@ public class FXMLDocumentController implements Initializable {
                         + " " + Math.round(list.get(i).getOdometerReadingKm()) + " " + list.get(i).getTankCapacityL() + " "+ list.get(i).s.lastServiceOdometerKm + " " + list.get(i).s.serviceCount
                         + " " + list.get(i).s.lastServiceDate + " " + list.get(i).s.RequiredService + " " + Math.round(list.get(i).fuelPurchase.getFuelEconomy()) + " " + Math.round(list.get(i).getRevenuerecorded()) + Math.round(list.get(i).fuelPurchase.getFuel()) +
                         " " +  Math.round(list.get(i).fuelPurchase.getCost()));
-      
        }
-       
        outfile.close();
-
-       
        }catch (FileNotFoundException ex) {
               JOptionPane.showMessageDialog(null, "txt file not found or error with writin");
         }
@@ -342,6 +338,7 @@ public class FXMLDocumentController implements Initializable {
      * show details on details page
      */
     public void print_Details(){
+        try{
      int p =  TableView.getSelectionModel().getSelectedIndex();
           ManufactorT.setText(list.get(p).getManufacturer());
              ModelT.setText(list.get(p).getModel());
@@ -357,6 +354,10 @@ public class FXMLDocumentController implements Initializable {
             MadeCost.setText(Double.toString(list.get(p).getRevenuerecorded()));
             CostOfFuel.setText(Double.toString(list.get(p).fuelPurchase.getCost()));
             LitresPurchase.setText(Double.toString(list.get(p).fuelPurchase.getFuel()));
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "SPlease Select a Vehicle to view their Details");
+        }
+                    
     }
     /**
      * Reset all text boxes

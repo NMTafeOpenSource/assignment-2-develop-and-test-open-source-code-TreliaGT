@@ -16,16 +16,32 @@ public class FuelPurchase {
 
 	public double getFuelEconomy() {
 		return fuelEconomy;
-            //return this.cost / this.litres;
 	}
         
+        public void setFuelEconomy(double fuelEconomy) {
+		this.fuelEconomy = fuelEconomy;
+	}
+        
+        public double getCalFuelEconomy(double cost, double litres){
+            return cost / litres;
+        }
+        
+        public void setFuel(double Ffuel){
+             this.litres = Ffuel;
+         }
+         
         public double getFuel(){
             return this.litres;
         }
 
-	public void setFuelEconomy(double fuelEconomy) {
-		this.fuelEconomy = fuelEconomy;
-	}
+	public void setCost(double fCost){
+        this.cost = fCost;
+        }
+//        
+        public double getCost(){
+            return this.cost;
+        }
+        
         public void purchaseFuel(double amount,double price){
             this.litres += amount;
             this.cost += price;

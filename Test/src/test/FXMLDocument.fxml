@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.FXMLDocumentController">
     <children>
       <Pane fx:id="add" layoutX="27.0" layoutY="24.0" prefHeight="496.0" prefWidth="295.0">
          <children>
@@ -43,12 +43,20 @@
                   <Font size="22.0" />
                </font>
             </Text>
-            <CheckBox fx:id="RS" layoutX="142.0" layoutY="382.0" mnemonicParsing="false" text="Requires Service" />
+            <CheckBox fx:id="RS" layoutX="153.0" layoutY="432.0" mnemonicParsing="false" text="Requires Service" />
             <Text layoutX="6.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuel Economy Km per L" />
             <TextField fx:id="FuelE" layoutX="133.0" layoutY="311.0" />
             <TextField fx:id="MadeCost" layoutX="133.0" layoutY="346.0" />
             <Text layoutX="19.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revenue recorded $" />
             <Button fx:id="Service" layoutX="1.0" layoutY="470.0" mnemonicParsing="false" onAction="#Service_Click" text="Recorded Service" />
+            <Pane fx:id="moreDetailsP" layoutX="-11.0" layoutY="359.0" prefHeight="84.0" prefWidth="304.0">
+               <children>
+                  <TextField fx:id="CostOfFuel" layoutX="141.0" layoutY="14.0" />
+                  <Text layoutX="55.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost of Fuel" />
+                  <TextField fx:id="LitresPurchase" layoutX="141.0" layoutY="42.0" />
+                  <Text layoutX="42.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Litres Purchase L" />
+               </children>
+            </Pane>
          </children>
       </Pane>
       <Pane fx:id="Main" layoutX="14.0" layoutY="27.0" prefHeight="469.0" prefWidth="651.0" visible="false">
@@ -106,7 +114,7 @@
       </Pane>
       <Pane fx:id="ServiceP" layoutX="332.0" layoutY="30.0" prefHeight="454.0" prefWidth="330.0" visible="false">
          <children>
-            <Label layoutX="28.0" layoutY="22.0" text="Service Update">
+            <Label layoutX="28.0" layoutY="22.0" text="Service ">
                <font>
                   <Font size="28.0" />
                </font>

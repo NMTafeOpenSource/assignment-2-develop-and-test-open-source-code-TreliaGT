@@ -37,7 +37,7 @@ public final class Vehicle {
          * @param Costmade
 	 */
 	public Vehicle(String manufacturer, String model, int makeYear, String RegistrationNo,double OdometerReadingKm, int TankCapacityL
-        ,int LastService0, int SC , String Date, boolean RS, double FuelE, double Costmade) {
+        ,int LastService0, int SC , String Date, boolean RS, double FuelE, double Costmade, double litres, double cost) {
 		setmanufacturer(manufacturer);
 		setModel(model);
 		setMakeYear(makeYear);
@@ -49,7 +49,11 @@ public final class Vehicle {
                 s.RequiredService = RS;
                 fuelPurchase.setFuelEconomy(FuelE);
                 setRevenuerecorded(Costmade);
+                fuelPurchase.setFuel(litres);
+                fuelPurchase.setCost(cost);
 	}
+
+  
         
         
         

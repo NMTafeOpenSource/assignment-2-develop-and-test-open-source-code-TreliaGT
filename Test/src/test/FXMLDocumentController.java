@@ -5,11 +5,14 @@
  */
 package test;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,6 +34,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import java.lang.String;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -214,7 +219,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void print_click(ActionEvent event) throws IOException  {
-       rentalPrint();
+      updatingRent();
        
     }
     @FXML
@@ -408,29 +413,48 @@ public class FXMLDocumentController implements Initializable {
      * Print out information on rented out car
      * @throws IOException 
      */
-    public void rentalPrint() throws IOException{
+    public void rentalPrint() {
   int i =  TableView.getSelectionModel().getSelectedIndex();
-        File file = new File("src\\test\\" + FileName.getText() + ".txt");
-  
-        //Create the file
-        if (file.createNewFile())
-        {
-         JOptionPane.showMessageDialog(null, "File is created!");
-        } else {
-            JOptionPane.showMessageDialog(null, "File already exists.");
-    }
+  String WhereFile = "src\\test\\" + FileName.getText() + ".txt";
+        File file = new File(WhereFile);
+
+       try {
+           //Create the file
+           if (file.createNewFile())
+           {
+               JOptionPane.showMessageDialog(null, "File is created!");
+           } else {
+               JOptionPane.showMessageDialog(null, "File already exists.");
+           }  
+       
  
         //Write Content
-        FileWriter writer = new FileWriter(file);
-        writer.write(("Vehicle: " + list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " Registration" + list.get(i).getRegistrationNo()));
-           writer.write(("Odometer Reading: " + list.get(i).getOdometerReadingKm() + " TankCapacity: " + list.get(i).getTankCapacityL() + "L  ServiceCount:" + list.get(i).s.serviceCount
-                        + " LastServicedDate:" + list.get(i).s.lastServiceDate ));
-        writer.write("Between" + rentout.getValue().toString() + " - " + Collection.getValue().toString());
-         writer.write("Cost: $" + rentalCost());
-      writer.write("FuelEconomy " + Double.toString(list.get(i).fuelPurchase.getFuelEconomy()));
-        writer.close();
-         JOptionPane.showMessageDialog(null, "Select Payment Method");
-        updatingRent();
+        OutputStreamWriter Writer = new OutputStreamWriter(
+                    new FileOutputStream(WhereFile), "UTF-8");
+        BufferedWriter writer = new BufferedWriter(Writer);
+             writer.write(("Vehicle: " + list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " Registration" + list.get(i).getRegistrationNo()));
+         
+             writer.write("Odometer Reading: " + list.get(i).getOdometerReadingKm()); 
+              
+             writer.write (" TankCapacity: " + list.get(i).getTankCapacityL() + "L" );
+               
+             writer.write("ServiceCount:" + list.get(i).s.serviceCount );
+              
+             writer.write(" LastServicedDate:" + list.get(i).s.lastServiceDate );
+               
+             writer.write("Between" + rentout.getValue().toString() + " - " + Collection.getValue().toString());
+          
+             writer.write("Cost: $" + rentalCost());
+             
+             writer.write("FuelEconomy " + Double.toString(list.get(i).fuelPurchase.getFuelEconomy()));
+       
+           }catch(FileNotFoundException ex){
+               JOptionPane.showMessageDialog(null, "error with creating file");
+           } catch(IOException e){
+                JOptionPane.showMessageDialog(null, "file counldn't been written in");
+           }
+        
+       
     }
     
     /**
@@ -457,6 +481,7 @@ public class FXMLDocumentController implements Initializable {
                         , list.get(i).s.lastServiceDate ,  s.RequiredService(J.getKilometers() , list.get(i).s.serviceCount) , fp.getFuelEconomy() , Revenuerecorded
                          ,fp.getFuel(), fp.getCost())); 
        writerTxt(); //rewrite file to update the data
+       rentalPrint();
     }
     
     /**

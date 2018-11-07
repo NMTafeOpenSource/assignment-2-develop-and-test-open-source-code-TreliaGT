@@ -244,7 +244,7 @@ public class FXMLDocumentController implements Initializable {
             Scanner inFile = new Scanner(new FileReader("src\\test\\Vehicle.txt")); //read txt file
           
             while (inFile.hasNextLine()){ //read each line adding the task to the table veiw
-            String  manufacturer = inFile.next();
+            String  manufacturer = inFile.next(); 
             String model = inFile.next();
             int makeYear =   Integer.parseInt(inFile.next()); 
             String RegistrationNo =  inFile.next(); 
@@ -254,10 +254,10 @@ public class FXMLDocumentController implements Initializable {
             int ServiceCourt = Integer.parseInt(inFile.next());
             String Date = inFile.next();
               boolean RS = Boolean.parseBoolean(inFile.next());
-            double C = Double.parseDouble(inFile.next());
-            double litres = Double.parseDouble(inFile.next());
-            double Cost = Double.parseDouble(inFile.next());
-             double FE = fp.getCalFuelEconomy(Cost, litres);
+            double C = Math.round(Double.parseDouble(inFile.next()));
+            double litres = Math.round(Double.parseDouble(inFile.next()));
+            double Cost = Math.round(Double.parseDouble(inFile.next()));
+             double FE = Math.round(fp.getCalFuelEconomy(Cost, litres));
            list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date , RS, FE, C, litres, Cost));
             } 
             
@@ -271,7 +271,7 @@ public class FXMLDocumentController implements Initializable {
                TableView.setItems(Tasksdata);
                
         } catch (FileNotFoundException ex) { //errors messages
-          JOptionPane.showMessageDialog(null, "txt file not found or there is a space in the txt file");
+          JOptionPane.showMessageDialog(null, "txt file not found. Or there is a space in the txt file which causes this program to not display the required Data");
           
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "There was a problem with loading the txt file into this page");
@@ -298,8 +298,8 @@ public class FXMLDocumentController implements Initializable {
             boolean RService = RS.isSelected();
             double FE = Double.parseDouble(FuelE.getText());
             double C = Double.parseDouble(MadeCost.getText());
-            double litres = 0;
-            double Cost = 0;
+            double litres = 0.0;
+            double Cost = 0.0;
            list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date, RService, FE , C, litres, Cost));
         
             ObservableList<Vehicle> Tasksdata = FXCollections.observableArrayList(list);
@@ -323,8 +323,9 @@ public class FXMLDocumentController implements Initializable {
        for (int i = 0; i < list.size(); i++) {
         
          outfile.println(list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " " + list.get(i).getRegistrationNo()
-                        + " " + list.get(i).getOdometerReadingKm() + " " + list.get(i).getTankCapacityL() + " "+ list.get(i).s.lastServiceOdometerKm + " " + list.get(i).s.serviceCount
-                        + " " + list.get(i).s.lastServiceDate + " " + list.get(i).s.RequiredService + " " + list.get(i).fuelPurchase.getFuelEconomy() + " " + list.get(i).getRevenuerecorded());
+                        + " " + Math.round(list.get(i).getOdometerReadingKm()) + " " + list.get(i).getTankCapacityL() + " "+ list.get(i).s.lastServiceOdometerKm + " " + list.get(i).s.serviceCount
+                        + " " + list.get(i).s.lastServiceDate + " " + list.get(i).s.RequiredService + " " + Math.round(list.get(i).fuelPurchase.getFuelEconomy()) + " " + Math.round(list.get(i).getRevenuerecorded()) + Math.round(list.get(i).fuelPurchase.getFuel()) +
+                        " " +  Math.round(list.get(i).fuelPurchase.getCost()));
                         
 		}
           
@@ -402,13 +403,14 @@ public class FXMLDocumentController implements Initializable {
                   return 0;
         }
     }
+    
     /**
      * Print out information on rented out car
      * @throws IOException 
      */
     public void rentalPrint() throws IOException{
   int i =  TableView.getSelectionModel().getSelectedIndex();
-        File file = new File("c://temp//" + FileName.getText() + ".txt");
+        File file = new File("src\\test\\" + FileName.getText() + ".txt");
   
         //Create the file
         if (file.createNewFile())
@@ -430,6 +432,7 @@ public class FXMLDocumentController implements Initializable {
          JOptionPane.showMessageDialog(null, "Select Payment Method");
         updatingRent();
     }
+    
     /**
      * Updating information after printing informations
      */

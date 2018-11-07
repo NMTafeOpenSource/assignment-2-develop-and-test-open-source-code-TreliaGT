@@ -5,14 +5,11 @@
  */
 package test;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
@@ -34,8 +31,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import java.lang.String;
 import java.time.LocalDate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -326,15 +321,14 @@ public class FXMLDocumentController implements Initializable {
        try (PrintWriter outfile = new PrintWriter("src\\test\\Vehicle.txt")) {
 
        for (int i = 0; i < list.size(); i++) {
-        
+       
          outfile.println(list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " " + list.get(i).getRegistrationNo()
                         + " " + Math.round(list.get(i).getOdometerReadingKm()) + " " + list.get(i).getTankCapacityL() + " "+ list.get(i).s.lastServiceOdometerKm + " " + list.get(i).s.serviceCount
                         + " " + list.get(i).s.lastServiceDate + " " + list.get(i).s.RequiredService + " " + Math.round(list.get(i).fuelPurchase.getFuelEconomy()) + " " + Math.round(list.get(i).getRevenuerecorded()) + Math.round(list.get(i).fuelPurchase.getFuel()) +
                         " " +  Math.round(list.get(i).fuelPurchase.getCost()));
-                        
-		}
-          
-           getVehicles();
+       }
+        getVehicles();
+       
        }catch (FileNotFoundException ex) {
               JOptionPane.showMessageDialog(null, "txt file not found or error with writin");
         }
@@ -413,46 +407,29 @@ public class FXMLDocumentController implements Initializable {
      * Print out information on rented out car
      * @throws IOException 
      */
-    public void rentalPrint() {
+    public void rentalPrint() throws IOException{
   int i =  TableView.getSelectionModel().getSelectedIndex();
-  String WhereFile = "src\\test\\" + FileName.getText() + ".txt";
-        File file = new File(WhereFile);
-
-       try {
-           //Create the file
-           if (file.createNewFile())
-           {
-               JOptionPane.showMessageDialog(null, "File is created!");
-           } else {
-               JOptionPane.showMessageDialog(null, "File already exists.");
-           }  
-       
+        File file = new File("src\\test\\" + FileName.getText() + ".txt");
+  
+        //Create the file
+        if (file.createNewFile())
+        {
+         JOptionPane.showMessageDialog(null, "File is created!");
+        } else {
+            JOptionPane.showMessageDialog(null, "File already exists.");
+    }
  
         //Write Content
-        OutputStreamWriter Writer = new OutputStreamWriter(
-                    new FileOutputStream(WhereFile), "UTF-8");
-        BufferedWriter writer = new BufferedWriter(Writer);
-             writer.write(("Vehicle: " + list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " Registration" + list.get(i).getRegistrationNo()));
-         
-             writer.write("Odometer Reading: " + list.get(i).getOdometerReadingKm()); 
-              
-             writer.write (" TankCapacity: " + list.get(i).getTankCapacityL() + "L" );
-               
-             writer.write("ServiceCount:" + list.get(i).s.serviceCount );
-              
-             writer.write(" LastServicedDate:" + list.get(i).s.lastServiceDate );
-               
-             writer.write("Between" + rentout.getValue().toString() + " - " + Collection.getValue().toString());
-          
-             writer.write("Cost: $" + rentalCost());
-             
-             writer.write("FuelEconomy " + Double.toString(list.get(i).fuelPurchase.getFuelEconomy()));
-       
-           }catch(FileNotFoundException ex){
-               JOptionPane.showMessageDialog(null, "error with creating file");
-           } catch(IOException e){
-                JOptionPane.showMessageDialog(null, "file counldn't been written in");
-           }
+        PrintWriter writer = new PrintWriter(file);
+        writer.println(("Vehicle: " + list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " Registration" + list.get(i).getRegistrationNo()));
+           writer.println("Odometer Reading: " + list.get(i).getOdometerReadingKm()); 
+            writer.println (" TankCapacity: " + list.get(i).getTankCapacityL() + "L" );
+               writer.println("ServiceCount:" + list.get(i).s.serviceCount );
+                 writer.println(" LastServicedDate:" + list.get(i).s.lastServiceDate );
+        writer.println("Between" + rentout.getValue().toString() + " - " + Collection.getValue().toString());
+         writer.println("Cost: $" + rentalCost());
+      writer.println("FuelEconomy " + Double.toString(list.get(i).fuelPurchase.getFuelEconomy()));
+        writer.close();
         
        
     }
@@ -460,7 +437,7 @@ public class FXMLDocumentController implements Initializable {
     /**
      * Updating information after printing informations
      */
-    public void updatingRent(){
+    public void updatingRent() throws IOException{
           int i =  TableView.getSelectionModel().getSelectedIndex();
              //Get new OdometerReading
          Journey J = new Journey();
@@ -480,8 +457,9 @@ public class FXMLDocumentController implements Initializable {
                         , J.getKilometers() , list.get(i).getTankCapacityL() , list.get(i).s.lastServiceOdometerKm , list.get(i).s.serviceCount
                         , list.get(i).s.lastServiceDate ,  s.RequiredService(J.getKilometers() , list.get(i).s.serviceCount) , fp.getFuelEconomy() , Revenuerecorded
                          ,fp.getFuel(), fp.getCost())); 
-       writerTxt(); //rewrite file to update the data
        rentalPrint();
+       writerTxt(); //rewrite file to update the data
+       
     }
     
     /**

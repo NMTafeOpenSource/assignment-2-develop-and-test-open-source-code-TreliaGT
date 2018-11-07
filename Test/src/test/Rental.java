@@ -28,7 +28,7 @@ public class Rental {
         return Amount * Days;
     }
     //rental for per km
-     public double getRentalCostKm(){
+     public  double getRentalCostKm(){
         return Amount * Km;
     }
      //total Revenue Recorded

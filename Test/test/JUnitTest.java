@@ -10,12 +10,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import test.FuelPurchase;
 
 /**
  *
  * @author V244682
  */
 public class JUnitTest {
+   
     
     public JUnitTest() {
     }
@@ -40,8 +42,15 @@ public class JUnitTest {
     // The methods must be annotated with annotation @Test. For example:
    
      @Test
-     public void hello() {
-     
-     
+     public void getCalFuelEconomy() {
+       double expected = 10.0;
+       double actual = FuelPurchase.getCalFuelEconomy(45.0, 5.0);
+       assertEquals(expected, actual);
      }
+     
+        
+     
+     
+     
+     
 }

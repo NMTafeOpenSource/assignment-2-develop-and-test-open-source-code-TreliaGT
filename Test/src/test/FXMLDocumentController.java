@@ -187,17 +187,11 @@ public class FXMLDocumentController implements Initializable {
     private void Delete_Click(ActionEvent event) {
         try{
         list.remove(TableView.getSelectionModel().getSelectedIndex());
-           Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
-       Model.setCellValueFactory(new PropertyValueFactory<>("model"));
-       MakeYear.setCellValueFactory(new PropertyValueFactory<>("makeYear"));
-       Registration.setCellValueFactory(new PropertyValueFactory<>("RegistrationNo"));
-       Odometre.setCellValueFactory(new PropertyValueFactory<>("OdometerReadingKm"));
-       Tank.setCellValueFactory(new PropertyValueFactory<>("TankCapacityL"));
-        TableView.setItems(Tasksdata);
+     refresh();
+     
         writerTxt();
         }catch(Exception e){
               JOptionPane.showMessageDialog(null, "Please Click on what Vehicle You Wish To Delete");
-           
         }
     }
     
@@ -242,8 +236,9 @@ public class FXMLDocumentController implements Initializable {
             
         try {
             Scanner inFile = new Scanner(new FileReader("src\\test\\Vehicle.txt")); //read txt file
-          
+        
             while (inFile.hasNextLine()){ //read each line adding the task to the table veiw
+              
             String  manufacturer = inFile.next(); 
             String model = inFile.next();
             int makeYear =   Integer.parseInt(inFile.next()); 
@@ -258,17 +253,12 @@ public class FXMLDocumentController implements Initializable {
             double litres = Math.round(Double.parseDouble(inFile.next()));
             double Cost = Math.round(Double.parseDouble(inFile.next()));
              double FE = Math.round(fp.getCalFuelEconomy(Cost, litres));
+                
            list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date , RS, FE, C, litres, Cost));
+                
             } 
             
-            ObservableList<Vehicle> Tasksdata = FXCollections.observableArrayList(list);
-          Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
-            Model.setCellValueFactory(new PropertyValueFactory<>("model"));
-            MakeYear.setCellValueFactory(new PropertyValueFactory<>("makeYear"));
-             Registration.setCellValueFactory(new PropertyValueFactory<>("RegistrationNo"));
-             Odometre.setCellValueFactory(new PropertyValueFactory<>("OdometerReadingKm"));
-             Tank.setCellValueFactory(new PropertyValueFactory<>("TankCapacityL"));
-               TableView.setItems(Tasksdata);
+         refresh();
                
         } catch (FileNotFoundException ex) { //errors messages
           JOptionPane.showMessageDialog(null, "txt file not found. Or there is a space in the txt file which causes this program to not display the required Data");
@@ -302,7 +292,13 @@ public class FXMLDocumentController implements Initializable {
             double Cost = 0.0;
            list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date, RService, FE , C, litres, Cost));
         
-            ObservableList<Vehicle> Tasksdata = FXCollections.observableArrayList(list);
+         refresh();
+       
+        writerTxt();
+    }
+    
+    public void refresh(){
+                    ObservableList<Vehicle> Tasksdata = FXCollections.observableArrayList(list);
           Manufactor.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
        Model.setCellValueFactory(new PropertyValueFactory<>("model"));
        MakeYear.setCellValueFactory(new PropertyValueFactory<>("makeYear"));
@@ -310,9 +306,12 @@ public class FXMLDocumentController implements Initializable {
        Odometre.setCellValueFactory(new PropertyValueFactory<>("OdometerReadingKm"));
        Tank.setCellValueFactory(new PropertyValueFactory<>("TankCapacityL"));
         TableView.setItems(Tasksdata);
-       
-        writerTxt();
     }
+    
+    
+    
+    
+    
 /**
  * write in new information to txt file
  */
@@ -326,8 +325,11 @@ public class FXMLDocumentController implements Initializable {
                         + " " + Math.round(list.get(i).getOdometerReadingKm()) + " " + list.get(i).getTankCapacityL() + " "+ list.get(i).s.lastServiceOdometerKm + " " + list.get(i).s.serviceCount
                         + " " + list.get(i).s.lastServiceDate + " " + list.get(i).s.RequiredService + " " + Math.round(list.get(i).fuelPurchase.getFuelEconomy()) + " " + Math.round(list.get(i).getRevenuerecorded()) + Math.round(list.get(i).fuelPurchase.getFuel()) +
                         " " +  Math.round(list.get(i).fuelPurchase.getCost()));
+      
        }
-        getVehicles();
+       
+       outfile.close();
+
        
        }catch (FileNotFoundException ex) {
               JOptionPane.showMessageDialog(null, "txt file not found or error with writin");
@@ -421,7 +423,7 @@ public class FXMLDocumentController implements Initializable {
  
         //Write Content
         PrintWriter writer = new PrintWriter(file);
-        writer.println(("Vehicle: " + list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " Registration" + list.get(i).getRegistrationNo()));
+        writer.println(("Vehicle: " + list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " Registration: " + list.get(i).getRegistrationNo()));
            writer.println("Odometer Reading: " + list.get(i).getOdometerReadingKm()); 
             writer.println (" TankCapacity: " + list.get(i).getTankCapacityL() + "L" );
                writer.println("ServiceCount:" + list.get(i).s.serviceCount );

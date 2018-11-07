@@ -1,8 +1,0 @@
-Vehicle: Holden ColoradoSUV 2014 Registration12ZGE54
-Odometer Reading: 370.0
- TankCapacity: 25L
-ServiceCount:1
- LastServicedDate:20/10/2010
-Between2018-11-01 - 2018-11-30
-Cost: $345.0
-FuelEconomy 0.0

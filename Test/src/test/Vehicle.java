@@ -104,31 +104,6 @@ public final class Vehicle {
     }
     public void setRevenuerecorded(double fRevenuerecorded){
         this.Revenuerecorded = fRevenuerecorded;
-    }
-        
-	/**
-	 * Prints details for {@link Vehicle}
-	 */
-	public void printDetails() {
-		System.out.println("Vehicle: " + makeYear + " " + manufacturer + " " + model);		
-                // TODO Display additional information about this vehicle
-	}
-
-        
-        //  addKilometers method which takes a parameter for distance travelled 
-         // and adds it to the odometer reading. 
-        public void addKilometers(int kilometersTravel){
-            this.OdometerReadingKm =+ kilometersTravel;
-        }
-        
-       
-
-        // adds fuel to the car
-        public void addFuel(double litres, double price){            
-            fuelPurchase.purchaseFuel(litres, price);
-        }   
-        
-      
-       
+    }    
 }
 

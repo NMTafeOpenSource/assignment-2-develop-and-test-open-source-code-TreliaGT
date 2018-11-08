@@ -14,8 +14,19 @@ public class Rental {
     private final double Km = 1;
     private double Amount;
     private double Total;
+    private boolean Rentout;
+    
+    
     
     //setters & getters
+    public boolean getRentout(){
+        return this.Rentout;
+    }
+    
+    public void setRentout(boolean isOut){
+        this.Rentout = isOut;
+    }
+    
   public double getAmount(){
         return this.Amount;
     }

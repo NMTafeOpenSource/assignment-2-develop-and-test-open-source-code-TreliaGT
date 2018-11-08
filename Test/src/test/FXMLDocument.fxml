@@ -17,8 +17,8 @@
     <children>
       <Pane fx:id="add" layoutX="27.0" layoutY="24.0" prefHeight="496.0" prefWidth="295.0">
          <children>
-            <Button fx:id="Back" layoutX="241.0" layoutY="470.0" mnemonicParsing="false" onAction="#Back_Click" text="Back" />
-            <Button fx:id="AddB" layoutX="196.0" layoutY="470.0" mnemonicParsing="false" onAction="#AddVehicles_Click" text="Add" />
+            <Button fx:id="Back" layoutX="261.0" layoutY="470.0" mnemonicParsing="false" onAction="#Back_Click" text="Back" />
+            <Button fx:id="AddB" layoutX="222.0" layoutY="470.0" mnemonicParsing="false" onAction="#AddVehicles_Click" text="Add" />
             <TextField fx:id="ManufactorT" layoutX="133.0" layoutY="29.0" />
             <Label layoutX="37.0" layoutY="33.0" text="ManuFactor" />
             <Label layoutX="55.0" layoutY="66.0" text="Model" />
@@ -37,7 +37,7 @@
             <TextField fx:id="LastServiceT" layoutX="133.0" layoutY="217.0" />
             <TextField fx:id="ServiceT" layoutX="133.0" layoutY="248.0" />
             <TextField fx:id="LastServiceDateT" layoutX="133.0" layoutY="281.0" />
-            <Button fx:id="RentB" layoutX="117.0" layoutY="470.0" mnemonicParsing="false" onAction="#rent_click" text="Rent In" />
+            <Button fx:id="RentB" layoutX="107.0" layoutY="470.0" mnemonicParsing="false" onAction="#rent_click" text="Rent In" />
             <Text layoutX="26.0" layoutY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicles Details">
                <font>
                   <Font size="22.0" />
@@ -55,8 +55,10 @@
                   <Text layoutX="55.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost of Fuel" />
                   <TextField fx:id="LitresPurchase" layoutX="141.0" layoutY="42.0" />
                   <Text layoutX="42.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Litres Purchase L" />
+                  <CheckBox fx:id="RendoutCheck" layoutX="42.0" layoutY="76.0" mnemonicParsing="false" text="Is rented Out" />
                </children>
             </Pane>
+            <Button fx:id="rentoutb" layoutX="161.0" layoutY="470.0" mnemonicParsing="false" onAction="#Rent_out" text="Rent Out" />
          </children>
       </Pane>
       <Pane fx:id="Main" layoutX="14.0" layoutY="27.0" prefHeight="469.0" prefWidth="651.0" visible="false">

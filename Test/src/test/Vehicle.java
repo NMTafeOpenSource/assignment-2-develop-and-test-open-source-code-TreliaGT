@@ -20,7 +20,7 @@ public final class Vehicle {
                
      public FuelPurchase fuelPurchase = new FuelPurchase();
      public Service s = new Service();
-     
+     public Rental R = new Rental();
      
 	/**
 	 * Class constructor specifying name of make (manufacturer), model and year
@@ -37,7 +37,7 @@ public final class Vehicle {
          * @param Costmade
 	 */
 	public Vehicle(String manufacturer, String model, int makeYear, String RegistrationNo,double OdometerReadingKm, int TankCapacityL
-        ,int LastService0, int SC , String Date, boolean RS, double FuelE, double Costmade, double litres, double cost) {
+        ,int LastService0, int SC , String Date, boolean RS, double FuelE, double Costmade, double litres, double cost, boolean Rented) {
 		setmanufacturer(manufacturer);
 		setModel(model);
 		setMakeYear(makeYear);
@@ -51,6 +51,7 @@ public final class Vehicle {
                 setRevenuerecorded(Costmade);
                 fuelPurchase.setFuel(litres);
                 fuelPurchase.setCost(cost);
+                R.setRentout(Rented);
 	}
 
   

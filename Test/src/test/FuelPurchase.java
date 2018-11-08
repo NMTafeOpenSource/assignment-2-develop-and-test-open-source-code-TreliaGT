@@ -45,7 +45,7 @@ public class FuelPurchase {
         }
         
          
-    public static double getCalFuelEconomy(double cost, double litres){
+    public double getCalFuelEconomy(double cost, double litres){
             return cost / litres;
         }
 }

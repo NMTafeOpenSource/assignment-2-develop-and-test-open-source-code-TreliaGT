@@ -218,7 +218,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void UpdateS_Click(ActionEvent event) {
+    private void UpdateS_Click(ActionEvent event) throws IOException {
         updatingService();
     }
 
@@ -227,6 +227,11 @@ public class FXMLDocumentController implements Initializable {
             ServiceP.setVisible(false);
             
             
+    }
+      @FXML
+    private void UpdateAll_Click(ActionEvent event) {
+        writerTxt();
+      System.exit(0);
     }
     
     /**
@@ -293,8 +298,6 @@ public class FXMLDocumentController implements Initializable {
            list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date, RService, FE , C, litres, Cost));
         
          refresh();
-       
-        writerTxt();
     }
     
     public void refresh(){
@@ -320,12 +323,16 @@ public class FXMLDocumentController implements Initializable {
        try (PrintWriter outfile = new PrintWriter("src\\test\\Vehicle.txt")) {
 
        for (int i = 0; i < list.size(); i++) {
-       
-         outfile.println(list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " " + list.get(i).getRegistrationNo()
-                        + " " + Math.round(list.get(i).getOdometerReadingKm()) + " " + list.get(i).getTankCapacityL() + " "+ list.get(i).s.lastServiceOdometerKm + " " + list.get(i).s.serviceCount
-                        + " " + list.get(i).s.lastServiceDate + " " + list.get(i).s.RequiredService + " " + Math.round(list.get(i).fuelPurchase.getFuelEconomy()) + " " + Math.round(list.get(i).getRevenuerecorded()) + Math.round(list.get(i).fuelPurchase.getFuel()) +
-                        " " +  Math.round(list.get(i).fuelPurchase.getCost()));
+           if(list.size() != -1) {
+            
+               outfile.write(list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " " + list.get(i).getRegistrationNo()
+                       + " " + Math.round(list.get(i).getOdometerReadingKm()) + " " + list.get(i).getTankCapacityL() + " "+ list.get(i).s.lastServiceOdometerKm + " " + list.get(i).s.serviceCount
+                       + " " + list.get(i).s.lastServiceDate + " " + list.get(i).s.RequiredService + " " + Math.round(list.get(i).fuelPurchase.getFuelEconomy()) + " " + Math.round(list.get(i).getRevenuerecorded()) + Math.round(list.get(i).fuelPurchase.getFuel()) +
+                       " " +  Math.round(list.get(i).fuelPurchase.getCost()));
+                   outfile.println();
+           }
        }
+      
        outfile.close();
        }catch (FileNotFoundException ex) {
               JOptionPane.showMessageDialog(null, "txt file not found or error with writin");
@@ -461,14 +468,14 @@ public class FXMLDocumentController implements Initializable {
                         , list.get(i).s.lastServiceDate ,  s.RequiredService(J.getKilometers() , list.get(i).s.serviceCount) , fp.getFuelEconomy() , Revenuerecorded
                          ,fp.getFuel(), fp.getCost())); 
        rentalPrint();
-       writerTxt(); //rewrite file to update the data
-       
+    //rewrite file to update the data
+    
     }
     
     /**
      * Updating service information
      */
-    public void updatingService(){
+    public void updatingService() throws IOException{
          int i =  TableView.getSelectionModel().getSelectedIndex();
          
          //service
@@ -478,8 +485,10 @@ public class FXMLDocumentController implements Initializable {
       list.set(i, new Vehicle(list.get(i).getManufacturer() , list.get(i).getModel() , list.get(i).getMakeYear() , list.get(i).getRegistrationNo()
                         , list.get(i).getOdometerReadingKm() , list.get(i).getTankCapacityL() , s.lastServiceOdometerKm , s.serviceCount
                         , s.lastServiceDate , false , list.get(i).fuelPurchase.getFuelEconomy() , list.get(i).getRevenuerecorded(), list.get(i).fuelPurchase.getFuel(), list.get(i).fuelPurchase.getCost())); 
-       writerTxt();
+ rentalPrint();
     }
+
+  
     
     
 }

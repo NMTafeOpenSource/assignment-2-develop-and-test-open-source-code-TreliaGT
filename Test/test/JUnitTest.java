@@ -21,14 +21,6 @@ public class JUnitTest {
     }
    
     // The methods must be annotated with annotation @Test. For example:
-   
-     @Test
-     public void getCalFuelEconomy() {
-       double expected = 9.0;
-       
-       double actual = FuelPurchase.getCalFuelEconomy(45.0, 5.0);
-       assertEquals(expected, actual, 9.0);
-     }
      
         @Test
          public void trueRequiredService(){
@@ -42,8 +34,5 @@ public class JUnitTest {
             boolean expected = false;
             boolean actual = Service.RequiredService(10000.0, 1);
                assertEquals(expected, actual);
-     }
-     
-         
-     
+     } 
 }

@@ -37,7 +37,7 @@
             <TextField fx:id="LastServiceT" layoutX="133.0" layoutY="217.0" />
             <TextField fx:id="ServiceT" layoutX="133.0" layoutY="248.0" />
             <TextField fx:id="LastServiceDateT" layoutX="133.0" layoutY="281.0" />
-            <Button fx:id="RentB" layoutX="107.0" layoutY="470.0" mnemonicParsing="false" onAction="#rent_click" text="Rent In" />
+            <Button fx:id="RentB" layoutX="90.0" layoutY="470.0" mnemonicParsing="false" onAction="#rent_click" text="Collection" />
             <Text layoutX="26.0" layoutY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicles Details">
                <font>
                   <Font size="22.0" />
@@ -48,7 +48,7 @@
             <TextField fx:id="FuelE" layoutX="133.0" layoutY="311.0" />
             <TextField fx:id="MadeCost" layoutX="133.0" layoutY="346.0" />
             <Text layoutX="19.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revenue recorded $" />
-            <Button fx:id="Service" layoutX="1.0" layoutY="470.0" mnemonicParsing="false" onAction="#Service_Click" text="Recorded Service" />
+            <Button fx:id="Service" layoutX="-17.0" layoutY="470.0" mnemonicParsing="false" onAction="#Service_Click" text="Recorded Service" />
             <Pane fx:id="moreDetailsP" layoutX="-11.0" layoutY="359.0" prefHeight="84.0" prefWidth="304.0">
                <children>
                   <TextField fx:id="CostOfFuel" layoutX="141.0" layoutY="14.0" />
@@ -90,7 +90,7 @@
             <RadioButton fx:id="day" layoutX="138.0" layoutY="94.0" mnemonicParsing="false" text="\$100 per day" />
             <TextField fx:id="Days" layoutX="153.0" layoutY="140.0" />
             <Text layoutX="25.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" How many Days" />
-            <Text layoutX="32.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rent In Car">
+            <Text layoutX="32.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Collection Of Car">
                <font>
                   <Font size="29.0" />
                </font>

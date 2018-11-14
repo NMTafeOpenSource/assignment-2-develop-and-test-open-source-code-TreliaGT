@@ -254,7 +254,6 @@ public class FXMLDocumentController implements Initializable {
      * Get vehicles from reading the txt file
      */
     public void getVehicles(){
-            
         try {
             Scanner inFile = new Scanner(new FileReader("src\\test\\Vehicle.txt")); //read txt file
       

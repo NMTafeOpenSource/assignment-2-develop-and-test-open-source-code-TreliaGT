@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.FXMLDocumentController">
     <children>
       <Pane fx:id="add" layoutX="27.0" layoutY="24.0" prefHeight="496.0" prefWidth="295.0">
          <children>
@@ -129,6 +129,5 @@
             <Button fx:id="close" layoutX="52.0" layoutY="154.0" mnemonicParsing="false" onAction="#Close_Click" text="Close" />
          </children>
       </Pane>
-      <Button layoutX="538.0" layoutY="12.0" mnemonicParsing="false" onAction="#UpdateAll_Click" prefHeight="25.0" prefWidth="124.0" text="Close Application" />
     </children>
 </AnchorPane>

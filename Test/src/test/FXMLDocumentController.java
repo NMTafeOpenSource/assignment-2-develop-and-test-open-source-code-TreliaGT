@@ -164,6 +164,7 @@ public class FXMLDocumentController implements Initializable {
           ServiceP.setVisible(false);
           ServiceT.setDisable(false);
           moreDetailsP.setVisible(false);
+            rentoutb.setVisible(true);
             reset();
     }
 
@@ -175,6 +176,7 @@ public class FXMLDocumentController implements Initializable {
         RentB.setVisible(false);
             AddB.setVisible(true);
             moreDetailsP.setVisible(false);
+            rentoutb.setVisible(false);
     }
 
     @FXML
@@ -229,15 +231,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void Close_Click(ActionEvent event) {
             ServiceP.setVisible(false);
-            
+          
             
     }
-      @FXML
-    private void UpdateAll_Click(ActionEvent event) {
-        writerTxt();
-      System.exit(0);
-    }
-    
+   
        @FXML
     private void Rent_out(ActionEvent event) { //rent out the car
          if(RS.isSelected() == true){
@@ -249,6 +246,8 @@ public class FXMLDocumentController implements Initializable {
               list.set(i, new Vehicle(list.get(i).getManufacturer() , list.get(i).getModel() , list.get(i).getMakeYear() , list.get(i).getRegistrationNo()
                         , list.get(i).getOdometerReadingKm() , list.get(i).getTankCapacityL() , s.lastServiceOdometerKm , s.serviceCount
                         , s.lastServiceDate , false , list.get(i).fuelPurchase.getFuelEconomy() , list.get(i).getRevenuerecorded(), list.get(i).fuelPurchase.getFuel(), list.get(i).fuelPurchase.getCost(), true)); 
+                JOptionPane.showMessageDialog(null, "This Vehicle is rented out");
+                  writerTxt();
          }
     }
     
@@ -259,7 +258,7 @@ public class FXMLDocumentController implements Initializable {
             
         try {
             Scanner inFile = new Scanner(new FileReader("src\\test\\Vehicle.txt")); //read txt file
-        
+      
             while (inFile.hasNextLine()){ //read each line adding the task to the table veiw
               
             String  manufacturer = inFile.next(); 
@@ -279,8 +278,9 @@ public class FXMLDocumentController implements Initializable {
              double FE = Math.round(fp.getCalFuelEconomy(Cost, litres));
                 
            list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date , RS, FE, C, litres, Cost, rent));
-                
-            } 
+              
+            }
+            
             
          refresh();
                
@@ -317,6 +317,7 @@ public class FXMLDocumentController implements Initializable {
            list.add(new Vehicle(manufacturer, model, makeYear, RegistrationNo, OdometerReadingKm, TankCapacityL ,LastService0 ,ServiceCourt, Date, RService, FE , C, litres, Cost, false));
         
          refresh();
+          writerTxt();
     }
     /**
      * Refreshes the table
@@ -342,16 +343,20 @@ public class FXMLDocumentController implements Initializable {
     public void writerTxt() {
       
        try (PrintWriter outfile = new PrintWriter("src\\test\\Vehicle.txt")) {
-
-       for (int i = 0; i < list.size(); i++) {
-               outfile.write(list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " " + list.get(i).getRegistrationNo()
+            int i = 0;
+      while ( i != list.size()) {
+               outfile.print(list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " " + list.get(i).getRegistrationNo()
                        + " " + Math.round(list.get(i).getOdometerReadingKm()) + " " + list.get(i).getTankCapacityL() + " "+ list.get(i).s.lastServiceOdometerKm + " " + list.get(i).s.serviceCount
                        + " " + list.get(i).s.lastServiceDate + " " + list.get(i).s.RequiredService + " " + Math.round(list.get(i).fuelPurchase.getFuelEconomy()) + " " + 
                        Math.round(list.get(i).getRevenuerecorded()) + Math.round(list.get(i).fuelPurchase.getFuel()) +
                        " " +  Math.round(list.get(i).fuelPurchase.getCost()) + " " + list.get(i).R.getRentout());
-                   outfile.println();
+                   i++;
+                   if(i == list.size()){
+                       
+                   }else{
+                       outfile.println();
+                   }
        }
-      
        outfile.close();
        }catch (FileNotFoundException ex) {
               JOptionPane.showMessageDialog(null, "txt file not found or error with writin");
@@ -489,6 +494,7 @@ public class FXMLDocumentController implements Initializable {
                         , list.get(i).s.lastServiceDate ,  s.RequiredService(J.getKilometers() , list.get(i).s.serviceCount) , fp.getFuelEconomy() , Revenuerecorded
                          ,fp.getFuel(), fp.getCost(), false)); 
        rentalPrint();
+        writerTxt();
     //rewrite file to update the data
     
     }
@@ -507,6 +513,7 @@ public class FXMLDocumentController implements Initializable {
                         , list.get(i).getOdometerReadingKm() , list.get(i).getTankCapacityL() , s.lastServiceOdometerKm , s.serviceCount
                         , s.lastServiceDate , false , list.get(i).fuelPurchase.getFuelEconomy() , list.get(i).getRevenuerecorded(), list.get(i).fuelPurchase.getFuel(), list.get(i).fuelPurchase.getCost(), false)); 
  rentalPrint();
+  writerTxt();
     }
 
  

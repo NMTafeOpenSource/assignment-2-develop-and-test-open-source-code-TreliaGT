@@ -1,0 +1,8 @@
+Vehicle: 345 345 345 Registration: 345
+Odometer Reading: 1380.0
+ TankCapacity: 345L
+ServiceCount:0
+ LastServicedDate:Unknown
+Between2018-11-15 - 2018-11-23
+Cost: $345.0
+FuelEconomy 0.0

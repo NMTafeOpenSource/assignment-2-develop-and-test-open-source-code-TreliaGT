@@ -35,4 +35,6 @@ public class JUnitTest {
             boolean actual = Service.RequiredService(10000.0, 1);
                assertEquals(expected, actual);
      } 
+         
+         
 }

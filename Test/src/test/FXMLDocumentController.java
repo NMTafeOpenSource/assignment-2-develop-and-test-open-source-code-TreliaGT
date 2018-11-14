@@ -130,11 +130,6 @@ public class FXMLDocumentController implements Initializable {
     private Button close;
     @FXML
     private Pane ServiceP;
-  
-    public ObservableList<Vehicle> Tasksdata;
-    Service s = new Service();
-    Rental R = new Rental();
-    FuelPurchase fp = new FuelPurchase();
     @FXML
     private Pane moreDetailsP;
     @FXML
@@ -145,6 +140,11 @@ public class FXMLDocumentController implements Initializable {
     private Button rentoutb;
     @FXML
     private CheckBox RendoutCheck;
+    
+     public ObservableList<Vehicle> Tasksdata;
+    Service s = new Service();
+    Rental R = new Rental();
+    FuelPurchase fp = new FuelPurchase();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -189,20 +189,19 @@ public class FXMLDocumentController implements Initializable {
             print_Details();
     }
     
-     @FXML
+     @FXML //removes a vehicle from the list and txt file
     private void Delete_Click(ActionEvent event) {
         try{
         list.remove(TableView.getSelectionModel().getSelectedIndex());
      refresh();
-     
         writerTxt();
         }catch(Exception e){
               JOptionPane.showMessageDialog(null, "Please Click on what Vehicle You Wish To Delete");
         }
     }
     
-      @FXML 
-    private void rent_click(ActionEvent event) {//if car needs service
+      @FXML //collection vehicle button to collect car wont work if the car requires service
+    private void rent_click(ActionEvent event) {
          ServiceP.setVisible(false);
          //if car needs service not about to rent
          if(RS.isSelected() == true){
@@ -236,7 +235,7 @@ public class FXMLDocumentController implements Initializable {
     }
    
        @FXML
-    private void Rent_out(ActionEvent event) { //rent out the car
+    private void Rent_out(ActionEvent event) { //collection vehicle button to collect car & update car details
          if(RS.isSelected() == true){
               JOptionPane.showMessageDialog(null, "This car needs Service");
          }else if (RendoutCheck.isSelected()){
@@ -252,7 +251,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     /**
-     * Get vehicles from txt file
+     * Get vehicles from reading the txt file
      */
     public void getVehicles(){
             
@@ -293,7 +292,7 @@ public class FXMLDocumentController implements Initializable {
      
     } 
 /**
- * Add Vehicle then use another method to add vehicle to txt file
+ * Add Vehicle then use another method to add vehicle to list then txt file
  * @param event 
  */
     @FXML 
@@ -387,7 +386,7 @@ public class FXMLDocumentController implements Initializable {
             LitresPurchase.setText(Double.toString(list.get(p).fuelPurchase.getFuel()));
               RendoutCheck.setSelected(list.get(p).R.getRentout());
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "SPlease Select a Vehicle to view their Details");
+            JOptionPane.showMessageDialog(null, "Please Select a Vehicle to view their Details");
         }
                     
     }
@@ -459,10 +458,10 @@ public class FXMLDocumentController implements Initializable {
         PrintWriter writer = new PrintWriter(file);
         writer.println(("Vehicle: " + list.get(i).getManufacturer() + " " + list.get(i).getModel() + " " + list.get(i).getMakeYear() + " Registration: " + list.get(i).getRegistrationNo()));
            writer.println("Odometer Reading: " + list.get(i).getOdometerReadingKm()); 
-            writer.println (" TankCapacity: " + list.get(i).getTankCapacityL() + "L" );
-               writer.println("ServiceCount:" + list.get(i).s.serviceCount );
-                 writer.println(" LastServicedDate:" + list.get(i).s.lastServiceDate );
-        writer.println("Between" + rentout.getValue().toString() + " - " + Collection.getValue().toString());
+            writer.println ("TankCapacity: " + list.get(i).getTankCapacityL() + "L" );
+               writer.println("ServiceCount: " + list.get(i).s.serviceCount );
+                 writer.println("LastServicedDate: " + list.get(i).s.lastServiceDate );
+        writer.println("Between: " + rentout.getValue().toString() + " - " + Collection.getValue().toString());
          writer.println("Cost: $" + rentalCost());
       writer.println("FuelEconomy " + Double.toString(list.get(i).fuelPurchase.getFuelEconomy()));
         writer.close();

@@ -13,7 +13,6 @@ public class Rental {
     private final double Days = 100;
     private final double Km = 1;
     private double Amount;
-    private double Total;
     private boolean Rentout;
     
     

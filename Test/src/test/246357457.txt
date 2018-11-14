@@ -1,8 +1,0 @@
-Vehicle: 123 12323 234 Registration: 2342
-Odometer Reading: 576.0
- TankCapacity: 342L
-ServiceCount:0
- LastServicedDate:Unknown
-Between2018-11-28 - 2018-11-29
-Cost: $234.0
-FuelEconomy 0.0

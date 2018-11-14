@@ -1,2 +1,1 @@
 Holden ColoradoSUV 2014 12ZGE54 2083 25 0 0 Unknown false 0 09122138 2138 false
-345 345 345 345 1380 345 0 0 Unknown false 0 10351035 1035 false

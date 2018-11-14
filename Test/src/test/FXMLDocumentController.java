@@ -165,6 +165,7 @@ public class FXMLDocumentController implements Initializable {
           ServiceT.setDisable(false);
           moreDetailsP.setVisible(false);
             rentoutb.setVisible(true);
+             Service.setVisible(true);
             reset();
     }
 
@@ -177,6 +178,7 @@ public class FXMLDocumentController implements Initializable {
             AddB.setVisible(true);
             moreDetailsP.setVisible(false);
             rentoutb.setVisible(false);
+            Service.setVisible(false);
     }
 
     @FXML

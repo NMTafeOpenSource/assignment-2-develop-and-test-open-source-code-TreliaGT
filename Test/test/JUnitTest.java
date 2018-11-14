@@ -35,6 +35,18 @@ public class JUnitTest {
             boolean actual = Service.RequiredService(10000.0, 1);
                assertEquals(expected, actual);
      } 
-         
+       @Test
+       public void getCalFuelEconomy1(){
+           double expected = 0.8;
+          double actual = FuelPurchase.getCalFuelEconomy(4, 5);
+                assertEquals(expected, actual, 0.8);   
+       }
+       
+       @Test 
+       public void getCalFuelEconomy2(){
+          double expected = 9;
+          double actual = FuelPurchase.getCalFuelEconomy(18, 2);
+                assertEquals(expected, actual, 9);   
+       }
          
 }

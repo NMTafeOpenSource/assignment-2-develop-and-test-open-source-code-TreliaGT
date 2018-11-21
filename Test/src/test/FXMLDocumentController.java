@@ -512,7 +512,7 @@ public class FXMLDocumentController implements Initializable {
       list.set(i, new Vehicle(list.get(i).getManufacturer() , list.get(i).getModel() , list.get(i).getMakeYear() , list.get(i).getRegistrationNo()
                         , list.get(i).getOdometerReadingKm() , list.get(i).getTankCapacityL() , s.lastServiceOdometerKm , s.serviceCount
                         , s.lastServiceDate , false , list.get(i).fuelPurchase.getFuelEconomy() , list.get(i).getRevenuerecorded(), list.get(i).fuelPurchase.getFuel(), list.get(i).fuelPurchase.getCost(), false)); 
- rentalPrint();
+
   writerTxt();
     }
 
